@@ -21,10 +21,10 @@
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1623168126085">
+  <link rel="stylesheet" href="/css/style.css?v=1623222109458">
   
-  <link rel="stylesheet" href="/css/style.css?v=1623168126085">
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1623168126085">
+  <link rel="stylesheet" href="/css/style.css?v=1623222109458">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1623222109458">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -49,7 +49,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>3</div>
-        <div><span>标签</span>0</div>
+        <div><span>标签</span>4</div>
         <div><span>分类</span>0</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -104,13 +104,20 @@
 
   
   
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+    </div>
+    
+  </div>
+
   
 </aside>
     <div class="nexmoe-copyright">
         &copy; 2021 林肥皂
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
-        
+        true
     </div>
 </div><!-- .nexmoe-drawer -->
   </div>
@@ -130,23 +137,13 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月09日</a>
-            <a><i class="nexmoefont icon-areachart"></i>448 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>458 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
-                <p>博主目前使用腾讯云+伪分布式的环境学习Hadoop框架，与一般的本地虚拟机+伪分布式环境相比，其中还是有一些区别的。  </p>
-<h1 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h1><p>今天在使用JAVA API读取HDFS文件时产生了两个错误<br>第一个错误显示无法写入DataNode，示意我DataNode未工作，但是登录节点查看，显示DataNode工作正常。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2sByx1"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/08/2sByx1.png" alt="2sByx1.png" class="lazyload"></a><br>第二个错误，我已经获取了数据的字节大小，却显示数据块丢失，但是通过节点查看文件状态，仍表示正常。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2sBs2R"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/08/2sBs2R.png" alt="2sBs2R.png" class="lazyload"></a><br>这两个报错真的相当具有迷惑性，在查阅了很多资料后，发现问题出在腾讯云+伪分布式的环境上。</p>
-<h1 id="错误原因"><a href="#错误原因" class="headerlink" title="错误原因"></a>错误原因</h1><p>HDFS的工作原理是客户端先向NameNode提交读写请求，NameNode向客户端返回物理存有数据DataNode节点的相关信息，客户端再向DataNode读写数据。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2scgsA"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/08/2scgsA.png" alt="2scgsA.png" class="lazyload"></a><br>根据第二个错误中可以获取数据的字节大小可以判断步骤1、2没有问题，问题出在步骤3，既客户端和DataNode的连接。<br>通过查阅资料发现，在步骤2中，NameNode向客户端返回的是DataNode的IP地址，由于该IP是内网IP，导致客户端无法连接到DataNode，使得无法获取文件信息。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>通过修改hdfs-site.xml配置文件，使得DadaNode和客户端之间采用域名的方式访问，解决内网IP无法连接的问题。<br>在hdfs-site.xml中添加以下配置信息：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.datanode.use.datanode.hostname&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<p>并在JAVA API初始化中，做相应的配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conf.set(&quot;dfs.client.use.datanode.hostname&quot;,&quot;true&quot;);</span><br></pre></td></tr></table></figure>
-
-
-
-
+                <p>博主目前使用腾讯云+伪分布式的环境学习Hadoop框架，与一般的本地虚拟机+伪分布式环境相比，其中还是有一些区别的,会导致一些意外的错误。  </p>
             
         </article>
     </div>
@@ -170,57 +167,6 @@
         <article>
             
                 <p>博主是大数据相关专业在学，目前已经跟着学校学习了一年多了，对大数据的一些框架有了初步的了解。之前也没有对知识进行梳理和总结。刚好，现在博客空空荡荡的，就先开一个坑。之后慢慢补充。</p>
-<h1 id="Hadoop框架总览"><a href="#Hadoop框架总览" class="headerlink" title="Hadoop框架总览"></a>Hadoop框架总览</h1><p>Hadoop是一个由Apache基金会所开发的分布式系统基础架构，作为大数据处理最基础的框架，有很多的大数据处理工具都是依赖于Hadoop框架，本文就先对Hadoop框架进行介绍。<br>目前，Hadoop已经更新了3个大版本，其中Hadoop2.X相比Hadoop1.X做出了较大的更新，Hadoop1.X只有HDFS和MapReduce两个组件，由于资源调度和计算都由MapReduce处理，使得框架处理效率低下。在Hadoop2.X的更新中，添加了YARN组件，专门处理资源调度工作，而MapReduce则专门处理计算工作。Hadoop3.X主要对Hadoop2.X进行优化，提升了效率和兼容性。</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/gzp6mQ"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/05/25/gzp6mQ.png" alt="gzp6mQ.png" class="lazyload"></a></p>
-<h1 id="Hadoop-组件介绍"><a href="#Hadoop-组件介绍" class="headerlink" title="Hadoop 组件介绍"></a>Hadoop 组件介绍</h1><h2 id="HDFS"><a href="#HDFS" class="headerlink" title="HDFS"></a>HDFS</h2><p>HDFS是Hadoop的分布式文件系统，主要处理大数据工作中的数据存储问题。使用HDFS具有以下优点  </p>
-<ol>
-<li>兼容性良好：<br>使用java语言编写，只要服务器支持JVM就可以作为HDFS的节点。 </li>
-<li>扩展性良好：<br>采用一个名称节点（NameNode）+多个数据节点（DataNode），数据节点只负责数据的存储，可以动态添加数据节点（既添加数据节点的时候可以不用重启集群）</li>
-<li>对大文件支持好，速度快<br>HDFS的设计目的就是针对大文件的处理，所以HDFS采用了切块的方式储存文件，默认每一个块为64M，相对于普通文件系统，在磁盘中寻址时间更短。由于是分布式存储，读取文件还有定位时间，HDFS在名称节点上存储了每个块的地址，可以快速的得到每个块的节点地址，使得定位时间减少。<br>采用流数据读写，提高了数据的吞吐量。</li>
-<li>数据安全性高<br>采用一个名称节点+一个次名称节点（SeondaryNameNode）的结构，次名称节点会帮助名称节点进行热备份和元数据合并。对于每个文件块，在多台不同的服务器上有备份。</li>
-</ol>
-<p>通过分布式的方式，将数据存储在不同的机器上，其优秀的可扩展性和兼容性，使得大量数据存储的成本降低。</p>
-<h3 id="HDFS-组件角色"><a href="#HDFS-组件角色" class="headerlink" title="HDFS 组件角色"></a>HDFS 组件角色</h3><p>HDFS组件角色大致分为四类：NameNode，SecondaryNameNode，DataNode,Client。</p>
-<ol>
-<li>NameNode：<ul>
-<li>接受客户端的读写请求</li>
-<li>存储元数据信息</li>
-<li>接受DataNode的心跳报告</li>
-<li>分配数据块的储存节点</li>
-</ul>
-</li>
-<li>SecondaryNameNode:<ul>
-<li>备份元数据信息</li>
-<li>帮助NameNode进行元数据合并</li>
-<li>在紧急情况下，可以辅助恢复NameNode</li>
-</ul>
-</li>
-<li>DataNode:<ul>
-<li>储存数据块</li>
-<li>向NameNode发送心跳报告</li>
-<li>处理客户端的读写请求</li>
-</ul>
-</li>
-<li>Client:<ul>
-<li>Client可以通过一些命令来访问HDFS，比如对HDFS增删查改操作</li>
-<li>文件切分。文件上传HDFS的时候，Client将文件切分成数据块</li>
-<li>与NameNode交互，获取文件的位置信息</li>
-<li>与DataNode交互，读取或者写入数据</li>
-</ul>
-</li>
-</ol>
-<h3 id="HDFS-具体工作机制"><a href="#HDFS-具体工作机制" class="headerlink" title="HDFS 具体工作机制"></a>HDFS 具体工作机制</h3><p>待更新</p>
-<h2 id="YARN"><a href="#YARN" class="headerlink" title="YARN"></a>YARN</h2><p>YARN由于本人还没深入的学习，就先搁着了，等学习完再做更新</p>
-<h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>MapReduce主要处理大主要处理大数据工作中的计算问题，在单台服务器算力有限的情况下，MapReduce采用分布式并行计算的方法，将一个任务划分为多个任务，分发到不同服务器进行并行计算，大大提升了计算效率。使用MapReduce计算具有以下特点  </p>
-<ol>
-<li>易于编程<br>MapReduce提供了分布式并行计算的框架，开发者只需要把注意力集中在业务逻辑的编写上即可，无需考虑如何将任务划分，如何分发到不同的服务器上运行这些底层的问题，这些功能MapReduce框架已经实现了。</li>
-<li>不适合流式计算<br>流式计算的输入数据的动态的，而MapReduce出于自身设计原因，会产生许多中间数据文件，并依赖这些文件继续计算。如果是输入数据是动态的，输入数据和中间数据不同步，也就会导致计算结果不同。所以MapReduce不适合流式计算</li>
-<li>不适合实时计算<br>MapReduce会对输入数据进行切分、产生中间数据、排序、数据压缩、持久化等操作，效率低下，使用MapReduce计算时间相对较长，不适合用于实时计算。</li>
-<li>不适合有依赖关系的计算<br>MapReduce是分布式并行计算框架，适用于并行计算。在一次MapReduce中，某个任务的输入是另一个任务的输出时，既两个任务是串行关系，就需要把前一个任务的输出全部写入到磁盘，再进行下一个任务，这样会产生大量的磁盘IO，导致效率下降。</li>
-</ol>
-<h3 id="MapReduce大致工作流程"><a href="#MapReduce大致工作流程" class="headerlink" title="MapReduce大致工作流程"></a>MapReduce大致工作流程</h3><p>MapReduce主要由Map阶段和Reduce阶段构成，其中Map的输出会作为Reduce的输入，先进行Map阶段，再进行Reduce阶段。围绕这两个阶段，还有一些其他的流程。大致流程图如下：<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/20uept"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/07/20uept.png" alt="20uept.png" class="lazyload"></a></p>
-<h3 id="MapReduce具体工作机制"><a href="#MapReduce具体工作机制" class="headerlink" title="MapReduce具体工作机制"></a>MapReduce具体工作机制</h3><p>待更新</p>
-
             
         </article>
     </div>
@@ -259,6 +205,11 @@
             <div class="nexmoe-tool"> 
               
                 
+                  
+                  
+                  
+                    
+                
               
               <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
             </div>
@@ -278,7 +229,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1623168126085"></script>
+<script src="/js/app.js?v=1623222109459"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

@@ -21,10 +21,10 @@
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1623168126084">
+  <link rel="stylesheet" href="/css/style.css?v=1623222109461">
   
-  <link rel="stylesheet" href="/css/style.css?v=1623168126084">
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1623168126084">
+  <link rel="stylesheet" href="/css/style.css?v=1623222109461">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1623222109461">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -49,7 +49,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>3</div>
-        <div><span>标签</span>0</div>
+        <div><span>标签</span>4</div>
         <div><span>分类</span>0</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -104,13 +104,20 @@
 
   
   
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+    </div>
+    
+  </div>
+
   
 </aside>
     <div class="nexmoe-copyright">
         &copy; 2021 林肥皂
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
-        
+        true
     </div>
 </div><!-- .nexmoe-drawer -->
   </div>
@@ -130,23 +137,13 @@
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
             <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月09日</a>
-            <a><i class="nexmoefont icon-areachart"></i>448 字</a>
+            <a><i class="nexmoefont icon-areachart"></i>458 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
         </div>
 
         <article>
             
-                <p>博主目前使用腾讯云+伪分布式的环境学习Hadoop框架，与一般的本地虚拟机+伪分布式环境相比，其中还是有一些区别的。  </p>
-<h1 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h1><p>今天在使用JAVA API读取HDFS文件时产生了两个错误<br>第一个错误显示无法写入DataNode，示意我DataNode未工作，但是登录节点查看，显示DataNode工作正常。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2sByx1"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/08/2sByx1.png" alt="2sByx1.png" class="lazyload"></a><br>第二个错误，我已经获取了数据的字节大小，却显示数据块丢失，但是通过节点查看文件状态，仍表示正常。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2sBs2R"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/08/2sBs2R.png" alt="2sBs2R.png" class="lazyload"></a><br>这两个报错真的相当具有迷惑性，在查阅了很多资料后，发现问题出在腾讯云+伪分布式的环境上。</p>
-<h1 id="错误原因"><a href="#错误原因" class="headerlink" title="错误原因"></a>错误原因</h1><p>HDFS的工作原理是客户端先向NameNode提交读写请求，NameNode向客户端返回物理存有数据DataNode节点的相关信息，客户端再向DataNode读写数据。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2scgsA"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/08/2scgsA.png" alt="2scgsA.png" class="lazyload"></a><br>根据第二个错误中可以获取数据的字节大小可以判断步骤1、2没有问题，问题出在步骤3，既客户端和DataNode的连接。<br>通过查阅资料发现，在步骤2中，NameNode向客户端返回的是DataNode的IP地址，由于该IP是内网IP，导致客户端无法连接到DataNode，使得无法获取文件信息。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>通过修改hdfs-site.xml配置文件，使得DadaNode和客户端之间采用域名的方式访问，解决内网IP无法连接的问题。<br>在hdfs-site.xml中添加以下配置信息：  </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;property&gt;</span><br><span class="line">    &lt;name&gt;dfs.datanode.use.datanode.hostname&lt;/name&gt;</span><br><span class="line">    &lt;value&gt;true&lt;/value&gt;</span><br><span class="line">&lt;/property&gt;</span><br></pre></td></tr></table></figure>
-<p>并在JAVA API初始化中，做相应的配置</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conf.set(&quot;dfs.client.use.datanode.hostname&quot;,&quot;true&quot;);</span><br></pre></td></tr></table></figure>
-
-
-
-
+                <p>博主目前使用腾讯云+伪分布式的环境学习Hadoop框架，与一般的本地虚拟机+伪分布式环境相比，其中还是有一些区别的,会导致一些意外的错误。  </p>
             
         </article>
     </div>
@@ -157,6 +154,11 @@
           <div class="nexmoe-fixed">
             <div class="nexmoe-tool"> 
               
+                
+                  
+                  
+                  
+                    
                 
               
               <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
@@ -177,7 +179,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1623168126085"></script>
+<script src="/js/app.js?v=1623222109461"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
