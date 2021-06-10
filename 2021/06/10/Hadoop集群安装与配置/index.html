@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>Hadoop集群安装与配置 - LinSoap</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" type="image/png" />
+  <meta name="description" content="一般学习Hadoop中的组件，使用伪分布式就够用了，但是老师突然要求写一篇关于集群搭建的博客，那就写在自己的博客上吧，顺便丰富一下博客内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hadoop集群安装与配置">
+<meta property="og:url" content="https://838819583.github.io/2021/06/10/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="LinSoap">
+<meta property="og:description" content="一般学习Hadoop中的组件，使用伪分布式就够用了，但是老师突然要求写一篇关于集群搭建的博客，那就写在自己的博客上吧，顺便丰富一下博客内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/09/26fRCq.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/09/26fg5n.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/09/264XnO.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/09/26HqgA.png">
+<meta property="og:image" content="https://z3.ax1x.com/2021/06/09/2c8ktI.png">
+<meta property="article:published_time" content="2021-06-10T06:50:54.025Z">
+<meta property="article:modified_time" content="2021-06-10T06:50:31.914Z">
+<meta property="article:author" content="林肥皂">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://z3.ax1x.com/2021/06/09/26fRCq.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=1623307860646">
+  
+  <link rel="stylesheet" href="/css/style.css?v=1623307860646">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1623307860646">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://z3.ax1x.com/2021/05/25/gxIsL8.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="林肥皂" class="mdui-btn mdui-btn-icon"><img src="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" alt="林肥皂"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="林肥皂">
+            <img src="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" alt="林肥皂" alt="林肥皂">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>4</div>
+        <div><span>标签</span>4</div>
+        <div><span>分类</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:linsoap.icu# https://www.google.com/search?q={你的博客链接}" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://steamcommunity.com/id/838819583/" target="_blank" mdui-tooltip="{content: 'Steam'}" style="color: rgb(76, 128, 187);background-color: rgba(76, 128, 187, .15);">
+            <i class="nexmoefont icon-steam"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/8683142" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/838819583" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(153, 255, 255);background-color: rgba(153, 255, 255, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/lin-wei-jian-45-53" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(0, 102, 255);background-color: rgba(0, 102, 255, .15);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2021 林肥皂
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        true
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+            <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Hadoop集群安装与配置" class="lazyload">
+            <h1>Hadoop集群安装与配置</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月10日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.3k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+</div>
+
+    
+
+    <p>一般学习Hadoop中的组件，使用伪分布式就够用了，但是老师突然要求写一篇关于集群搭建的博客，那就写在自己的博客上吧，顺便丰富一下博客内容。</p>
+<span id="more"></span>
+<h1 id="Hadoop集群搭建大致步骤"><a href="#Hadoop集群搭建大致步骤" class="headerlink" title="Hadoop集群搭建大致步骤"></a>Hadoop集群搭建大致步骤</h1><p>本文通过虚拟机搭建Hadoop集群，使用VMware Workstation Pro+CentOS7环境，均使用centos用户hadoop，搭建由三台主机构成的集群。<br>搭建Hadoop集群主要就2个步骤，一是搭建三台能够相互通信的主机，二是在三台主机上安装Hadoop并完成相关配置。</p>
+<ol>
+<li>搭建三台能够相互通信的主机<ul>
+<li>1.1 静态IP配置</li>
+<li>1.2 Hosts映射配置</li>
+<li>1.3 SSH免密登录配置</li>
+</ul>
+</li>
+<li>在三台主机上安装Hadoop并完成相关配置<ul>
+<li>2.1 JDK安装</li>
+<li>2.2 Hadoop安装并修改配置文件</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="搭建三台能够相互通信的主机"><a href="#搭建三台能够相互通信的主机" class="headerlink" title="搭建三台能够相互通信的主机"></a>搭建三台能够相互通信的主机</h2><h3 id="静态ip配置"><a href="#静态ip配置" class="headerlink" title="静态ip配置"></a>静态ip配置</h3><p>一般情况下，CentOS默认的IP获取方式是DHCP，但是对于集群来说，DHCP动态获取IP可能会导致集群间的通信不稳定，所以我们要设置静态IP。<br>我们把虚拟机的网络连接模式更改为“桥接模式”，并获取宿主机的IP，三台虚拟机的IP要和宿主机处在同一网段下。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26fRCq"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26fRCq.png" alt="26fRCq.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26fg5n"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26fg5n.png" alt="26fg5n.png" class="lazyload"></a><br>更改连接模式和获取IP后，开始对CentOS进行静态IP的配置，具体配置文件在/etc/sysconfig/network-scripts/ifcfg-ens33 文件中，使用vim打开文件，完成如下配置：<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/264XnO"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/264XnO.png" alt="264XnO.png" class="lazyload"></a><br>注意：配置的IP要和宿主机处在同一网段下，网关和宿主机相同。<br>保存后输入systemctl restart network指令刷新网络设置，刷新后使用ifconfig查看IP是否已经更改。并尝试相互ping三台主机。</p>
+<h3 id="Hosts映射配置"><a href="#Hosts映射配置" class="headerlink" title="Hosts映射配置"></a>Hosts映射配置</h3><p>三台主机HostName和IP规划  </p>
+<ol>
+<li>Master 172.16.1.121 </li>
+<li>Slave1 172.16.1.122</li>
+<li>Slave2 172.16.1.123 </li>
+</ol>
+<p>该步骤主要修改2个文件，/etc/hostname和/etc/hosts文件，其中hostname文件要根据主机的规划而有所不同，hosts文件三台主机一致即可。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26HqgA"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26HqgA.png" alt="26HqgA.png" class="lazyload"></a><br>完成hostname和hosts配置后，尝试使用hostname相互ping三台主机。</p>
+<h3 id="SSH免密登录配置"><a href="#SSH免密登录配置" class="headerlink" title="SSH免密登录配置"></a>SSH免密登录配置</h3><p>在Hadoop集群启动时会要求多次输入密码，非常麻烦，这时候就需要配置SSH免密登录了。<br>在Master节点上输入该指令生成公钥</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa (直接多次回车就行)</span><br><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<p>将Master的公钥，通过scp指令发送到Slave1和Slave2的.ssh文件夹，即可完成Master免密登录Slave1和Slave2.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub hadoop@slave01:/home/hadoop/</span><br><span class="line">scp ~/.ssh/id_rsa.pub hadoop@slave02:/home/hadoop/</span><br></pre></td></tr></table></figure>
+<p>再使用cat指令追加到authorized_keys下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">rm ~/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<p>完成以上操作后，尝试在Master节点，SSH登录到Slave1和Slave2，能够直接登录就说明SSH免密登录配置完成。</p>
+<h2 id="在三台主机上安装Hadoop并完成相关配置"><a href="#在三台主机上安装Hadoop并完成相关配置" class="headerlink" title="在三台主机上安装Hadoop并完成相关配置"></a>在三台主机上安装Hadoop并完成相关配置</h2><h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h3><p>Hadoop是由Java语言编写，JDK是Java语言的软件开发工具包，想要运行Hadoop，必须得先安装JDK。下载对应的解压包，使用以下指令解压到指定目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf 解压包 -C 指定目录</span><br><span class="line">例: </span><br><span class="line">tar -zxf jdk-8u291-linux-i586.tar.gz -C /home/hadoop/module/</span><br></pre></td></tr></table></figure>
+<p>解压完成后，配置相应的环境变量：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">添加以下内容：</span><br><span class="line">export JAVA_HOME=/home/hadoop/module/jdk1.8.0_291（JDK解压位置）</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br><span class="line">source ~/.bashrc（环境变量生效）</span><br></pre></td></tr></table></figure>
+<p>在配置完环境变量后，执行java -version查看java信息，返回以下信息说明JDK安装完成。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2c8ktI"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/2c8ktI.png" alt="2c8ktI.png" class="lazyload"></a></p>
+<h3 id="Hadoop安装并修改配置文件"><a href="#Hadoop安装并修改配置文件" class="headerlink" title="Hadoop安装并修改配置文件"></a>Hadoop安装并修改配置文件</h3><p>安装Hadoop只需要下载解压包，使用以下指令解压到指定目录即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf 解压包 -C 指定目录</span><br><span class="line">例: </span><br><span class="line">tar -zxf hadoop-2.7.0.tar.gz -C /home/hadoop/module/</span><br><span class="line">```  </span><br><span class="line">成功解压Hadoop后，添加Hadoop环境变量，在~/.bashrc添加以下内容  </span><br></pre></td></tr></table></figure>
+<p>export HADOOP_HOME=/home/hadoop/module/hadoop-2.7.0(Hadoop解压位置)<br>export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">集群需要修改的配置文件比伪分布式要多，只少修改5个配置文件，分别为Slave，core-site.xml，hdfs-site.xml，mapred-site.xml（需要重命名），yarn-site.xml，具体配置文件存放在hadoop目录下的etc/hadoop中。</span><br><span class="line">1. Slave（输入DataNode的域名）</span><br></pre></td></tr></table></figure>
+<p>Slave1<br>Slave2</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. core-site.xml</span><br></pre></td></tr></table></figure>
+  <configuration>
+      <property>
+          <name>hadoop.tmp.dir</name>
+          <value>file:/home/hadoop/module/hadoop-2.7.2/tmp</value>
+      </property>
+      <property>
+          <name>fs.defaultFS</name>
+          <value>hdfs://Master:9000</value>
+      </property>
+  </configuration>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. hdfs-site.xml</span><br></pre></td></tr></table></figure>
+</configuration>
+        <property>
+                <name>dfs.namenode.secondary.http-address</name>
+                <value>Master:50090</value>
+        </property>
+        <property>
+                <name>dfs.replication</name>
+                <value>2</value>
+        </property>
+        <property>
+                <name>dfs.namenode.name.dir</name>
+                <value>file:/home/hadoop/module/hadoop-2.7.2/tmp/dfs/name/</value>
+        </property>
+        <property>
+                <name>dfs.datanode.data.dir</name>
+                <value>file:/home/hadoop/module/hadoop-2.7.2/tmp/dfs/data/</value>
+        </property>
+</configuration>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4. mapred-site.xml(需要将mapred-site.xml.template改名)</span><br></pre></td></tr></table></figure>
+<configuration>
+        <property>
+                <name>mapreduce.framework.name</name>
+                <value>yarn</value>
+        </property>
+        <property>
+                <name>mapreduce.jobhistory.address</name>
+                <value>Master:10020</value>
+        </property>
+        <property>
+                <name>mapreduce.jobhistory.webapp.address</name>
+                <value>Master:19888</value>
+        </property>
+</configuration>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5. yarn-site.xml  </span><br></pre></td></tr></table></figure>
+<configuration>
+        <property>
+                <name>yarn.resourcemanager.hostname</name>
+                <value>Master</value>
+        </property>
+        <property>
+                <name>yarn.nodemanager.aux-services</name>
+                <value>mapreduce_shuffle</value>
+        </property>
+</configuration>
+```  
+
+<hr>
+<p>在Master节点配置好后，可以用scp直接将Hadoop文件夹发送到Slave1、Slave2节点，免去重新修改配置文件的麻烦。    </p>
+<p>最后在Master上使用start-all.sh指令启动Hadoop集群，通过jps查看进程状态，如果成功启动以下进程，说明Hadoop集群配置成功。  </p>
+<ol>
+<li>Master  </li>
+</ol>
+<ul>
+<li>jps  </li>
+<li>NameNode  </li>
+<li>SecondaryNameNode  </li>
+<li>ResourceManager</li>
+</ul>
+<ol start="2">
+<li>Slave1  </li>
+</ol>
+<ul>
+<li>jps  </li>
+<li>DataNode  </li>
+<li>NodeManager</li>
+</ul>
+<ol start="3">
+<li>Slave2  </li>
+</ol>
+<ul>
+<li>jps  </li>
+<li>DataNode  </li>
+<li>NodeManager  </li>
+</ul>
+<p>如果有进程缺失，可以到hadoop目录下的log文件夹内读取日志查看具体错误，然后擅用搜索引擎解决。</p>
+
+  </article>
+
+  
+    
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>林肥皂<br>
+    <strong>本文链接：</strong><a href="https://838819583.github.io/2021/06/10/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" title="https:&#x2F;&#x2F;838819583.github.io&#x2F;2021&#x2F;06&#x2F;10&#x2F;Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;838819583.github.io&#x2F;2021&#x2F;06&#x2F;10&#x2F;Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Hadoop/" rel="tag">Hadoop</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '68366cc70a9833c51a97',
+        clientSecret: '4043816fe5bed0fd7abdd41d0b72f7904cdb7fc9 ',
+        id: window.location.pathname,
+        repo: '838819583.github.io',
+        owner: '838819583',
+        admin: '838819583'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+        <div class="nexmoe-post-right">
+          <div class="nexmoe-fixed">
+            <div class="nexmoe-tool"> 
+              
+                
+                  
+                  
+                  
+                    <button class="mdui-fab catalog mdui-ripple" style="overflow:unset;">
+                      <i class="nexmoefont icon-i-catalog"></i>
+                      <div class="nexmoe-toc">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA%E5%A4%A7%E8%87%B4%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.</span> <span class="toc-text">Hadoop集群搭建大致步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA%E4%B8%89%E5%8F%B0%E8%83%BD%E5%A4%9F%E7%9B%B8%E4%BA%92%E9%80%9A%E4%BF%A1%E7%9A%84%E4%B8%BB%E6%9C%BA"><span class="toc-number">1.1.</span> <span class="toc-text">搭建三台能够相互通信的主机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81ip%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">静态ip配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hosts%E6%98%A0%E5%B0%84%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.2.</span> <span class="toc-text">Hosts映射配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E9%85%8D%E7%BD%AE"><span class="toc-number">1.1.3.</span> <span class="toc-text">SSH免密登录配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8%E4%B8%89%E5%8F%B0%E4%B8%BB%E6%9C%BA%E4%B8%8A%E5%AE%89%E8%A3%85Hadoop%E5%B9%B6%E5%AE%8C%E6%88%90%E7%9B%B8%E5%85%B3%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.</span> <span class="toc-text">在三台主机上安装Hadoop并完成相关配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.1.</span> <span class="toc-text">JDK安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadoop%E5%AE%89%E8%A3%85%E5%B9%B6%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">Hadoop安装并修改配置文件</span></a></li></ol></li></ol></li></ol>
+                      </div>
+                    </button>
+                  
+                    
+                
+              
+              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script>
+	hljs.initHighlightingOnLoad();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ 
+
+<script src="/js/app.js?v=1623307860654"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>
