@@ -7,6 +7,7 @@
   <title>Hadoop集群安装与配置 - LinSoap</title>
   <meta charset="UTF-8">
   <meta name="description" content="">
+  <meta name="keywords" content="Blog">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
   
   
@@ -15,7 +16,7 @@
   <meta name="description" content="一般学习Hadoop中的组件，使用伪分布式就够用了，但是老师突然要求写一篇关于集群搭建的博客，那就写在自己的博客上吧，顺便丰富一下博客内容。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hadoop集群安装与配置">
-<meta property="og:url" content="https://838819583.github.io/2021/06/10/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:url" content="https://838819583.github.io/2022/01/02/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/index.html">
 <meta property="og:site_name" content="LinSoap">
 <meta property="og:description" content="一般学习Hadoop中的组件，使用伪分布式就够用了，但是老师突然要求写一篇关于集群搭建的博客，那就写在自己的博客上吧，顺便丰富一下博客内容。">
 <meta property="og:locale" content="zh_CN">
@@ -24,18 +25,17 @@
 <meta property="og:image" content="https://z3.ax1x.com/2021/06/09/264XnO.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/06/09/26HqgA.png">
 <meta property="og:image" content="https://z3.ax1x.com/2021/06/09/2c8ktI.png">
-<meta property="article:published_time" content="2021-06-10T06:47:01.788Z">
-<meta property="article:modified_time" content="2021-06-10T06:51:54.268Z">
+<meta property="article:published_time" content="2022-01-01T17:31:54.000Z">
+<meta property="article:modified_time" content="2022-01-01T17:45:53.723Z">
 <meta property="article:author" content="林肥皂">
 <meta property="article:tag" content="Hadoop">
 <meta property="article:tag" content="大数据">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://z3.ax1x.com/2021/06/09/26fRCq.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1641056886595">
+  <link rel="stylesheet" href="/css/style.css?v=1641059208864">
   
-  <link rel="stylesheet" href="/css/style.css?v=1641056886595">
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641056886595">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641059208864">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -60,7 +60,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>5</div>
-        <div><span>标签</span>6</div>
+        <div><span>标签</span>4</div>
         <div><span>分类</span>0</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -110,7 +110,7 @@
   
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/Mapreduce/" style="font-size: 10px;">Mapreduce</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%90%9C%E7%8B%97%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%88%98/" style="font-size: 10px;">搜狗数据实战</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
     </div>
     
   </div>
@@ -138,9 +138,9 @@
     
     
     <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
-    <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月10日</a>
-    <a><i class="nexmoefont icon-areachart"></i>1.3k 字</a>
-    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月02日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
 </div>
 
     
@@ -171,80 +171,38 @@
 </ol>
 <p>该步骤主要修改2个文件，/etc/hostname和/etc/hosts文件，其中hostname文件要根据主机的规划而有所不同，hosts文件三台主机一致即可。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26HqgA"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26HqgA.png" alt="26HqgA.png" class="lazyload"></a><br>完成hostname和hosts配置后，尝试使用hostname相互ping三台主机。</p>
 <h3 id="SSH免密登录配置"><a href="#SSH免密登录配置" class="headerlink" title="SSH免密登录配置"></a>SSH免密登录配置</h3><p>在Hadoop集群启动时会要求多次输入密码，非常麻烦，这时候就需要配置SSH免密登录了。<br>在Master节点上输入该指令生成公钥</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa (直接多次回车就行)</span><br><span class="line">cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">chmod 600 ~/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+<figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arcade">ssh-keygen -t rsa (直接多次回车就行)<br>cat ~<span class="hljs-regexp">/.ssh/i</span>d_rsa.pub &gt;&gt; ~<span class="hljs-regexp">/.ssh/</span>authorized_keys<br>chmod <span class="hljs-number">600</span> ~<span class="hljs-regexp">/.ssh/</span>authorized_keys<br></code></pre></td></tr></table></figure>
 <p>将Master的公钥，通过scp指令发送到Slave1和Slave2的.ssh文件夹，即可完成Master免密登录Slave1和Slave2.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp ~/.ssh/id_rsa.pub hadoop@slave01:/home/hadoop/</span><br><span class="line">scp ~/.ssh/id_rsa.pub hadoop@slave02:/home/hadoop/</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs elixir">scp ~<span class="hljs-regexp">/.ssh/id</span>_rsa.pub hadoop<span class="hljs-variable">@slave01</span><span class="hljs-symbol">:/home/hadoop/</span><br>scp ~<span class="hljs-regexp">/.ssh/id</span>_rsa.pub hadoop<span class="hljs-variable">@slave02</span><span class="hljs-symbol">:/home/hadoop/</span><br></code></pre></td></tr></table></figure>
 <p>再使用cat指令追加到authorized_keys下</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</span><br><span class="line">rm ~/id_rsa.pub</span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">cat ~<span class="hljs-string">/id_rsa.pub</span> &gt;&gt; ~<span class="hljs-string">/.ssh/authorized_keys</span><br>rm ~<span class="hljs-string">/id_rsa.pub</span><br></code></pre></td></tr></table></figure>
 <p>完成以上操作后，尝试在Master节点，SSH登录到Slave1和Slave2，能够直接登录就说明SSH免密登录配置完成。</p>
 <h2 id="在三台主机上安装Hadoop并完成相关配置"><a href="#在三台主机上安装Hadoop并完成相关配置" class="headerlink" title="在三台主机上安装Hadoop并完成相关配置"></a>在三台主机上安装Hadoop并完成相关配置</h2><h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h3><p>Hadoop是由Java语言编写，JDK是Java语言的软件开发工具包，想要运行Hadoop，必须得先安装JDK。下载对应的解压包，使用以下指令解压到指定目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf 解压包 -C 指定目录</span><br><span class="line">例: </span><br><span class="line">tar -zxf jdk-8u291-linux-i586.tar.gz -C /home/hadoop/module/</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">tar -zxf 解压包 -C 指定目录<br>例: <br>tar -zxf jdk-<span class="hljs-number">8</span>u291-linux-i586.tar.gz -C <span class="hljs-regexp">/home/</span>hadoop<span class="hljs-regexp">/module/</span><br></code></pre></td></tr></table></figure>
 <p>解压完成后，配置相应的环境变量：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bashrc</span><br><span class="line">添加以下内容：</span><br><span class="line">export JAVA_HOME=/home/hadoop/module/jdk1.8.0_291（JDK解压位置）</span><br><span class="line">export PATH=$&#123;JAVA_HOME&#125;/bin:$PATH</span><br><span class="line">source ~/.bashrc（环境变量生效）</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs routeros">vim ~/.bashrc<br>添加以下内容：<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">JAVA_HOME</span>=/home/hadoop/module/jdk1.8.0_291（JDK解压位置）<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$&#123;JAVA_HOME&#125;</span>/bin:$PATH<br>source ~/.bashrc（环境变量生效）<br></code></pre></td></tr></table></figure>
 <p>在配置完环境变量后，执行java -version查看java信息，返回以下信息说明JDK安装完成。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/2c8ktI"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/2c8ktI.png" alt="2c8ktI.png" class="lazyload"></a></p>
 <h3 id="Hadoop安装并修改配置文件"><a href="#Hadoop安装并修改配置文件" class="headerlink" title="Hadoop安装并修改配置文件"></a>Hadoop安装并修改配置文件</h3><p>安装Hadoop只需要下载解压包，使用以下指令解压到指定目录即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -zxf 解压包 -C 指定目录</span><br><span class="line">例: </span><br><span class="line">tar -zxf hadoop-2.7.0.tar.gz -C /home/hadoop/module/</span><br><span class="line">```  </span><br><span class="line">成功解压Hadoop后，添加Hadoop环境变量，在~/.bashrc添加以下内容  </span><br></pre></td></tr></table></figure>
-<p>export HADOOP_HOME=/home/hadoop/module/hadoop-2.7.0(Hadoop解压位置)<br>export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">集群需要修改的配置文件比伪分布式要多，只少修改5个配置文件，分别为Slave，core-site.xml，hdfs-site.xml，mapred-site.xml（需要重命名），yarn-site.xml，具体配置文件存放在hadoop目录下的etc/hadoop中。</span><br><span class="line">1. Slave（输入DataNode的域名）</span><br></pre></td></tr></table></figure>
-<p>Slave1<br>Slave2</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2. core-site.xml</span><br></pre></td></tr></table></figure>
-  <configuration>
-      <property>
-          <name>hadoop.tmp.dir</name>
-          <value>file:/home/hadoop/module/hadoop-2.7.2/tmp</value>
-      </property>
-      <property>
-          <name>fs.defaultFS</name>
-          <value>hdfs://Master:9000</value>
-      </property>
-  </configuration>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">3. hdfs-site.xml</span><br></pre></td></tr></table></figure>
-</configuration>
-        <property>
-                <name>dfs.namenode.secondary.http-address</name>
-                <value>Master:50090</value>
-        </property>
-        <property>
-                <name>dfs.replication</name>
-                <value>2</value>
-        </property>
-        <property>
-                <name>dfs.namenode.name.dir</name>
-                <value>file:/home/hadoop/module/hadoop-2.7.2/tmp/dfs/name/</value>
-        </property>
-        <property>
-                <name>dfs.datanode.data.dir</name>
-                <value>file:/home/hadoop/module/hadoop-2.7.2/tmp/dfs/data/</value>
-        </property>
-</configuration>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4. mapred-site.xml(需要将mapred-site.xml.template改名)</span><br></pre></td></tr></table></figure>
-<configuration>
-        <property>
-                <name>mapreduce.framework.name</name>
-                <value>yarn</value>
-        </property>
-        <property>
-                <name>mapreduce.jobhistory.address</name>
-                <value>Master:10020</value>
-        </property>
-        <property>
-                <name>mapreduce.jobhistory.webapp.address</name>
-                <value>Master:19888</value>
-        </property>
-</configuration>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">tar -zxf 解压包 -C 指定目录<br>例: <br>tar -zxf hadoop-<span class="hljs-number">2.7</span>.<span class="hljs-number">0</span>.tar.gz -C <span class="hljs-regexp">/home/</span>hadoop<span class="hljs-regexp">/module/</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">5. yarn-site.xml  </span><br></pre></td></tr></table></figure>
-<configuration>
-        <property>
-                <name>yarn.resourcemanager.hostname</name>
-                <value>Master</value>
-        </property>
-        <property>
-                <name>yarn.nodemanager.aux-services</name>
-                <value>mapreduce_shuffle</value>
-        </property>
-</configuration>
-```  
+<p>成功解压Hadoop后，添加Hadoop环境变量，在~/.bashrc添加以下内容     </p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">HADOOP_HOME</span>=/home/hadoop/module/hadoop-2.7.0(Hadoop解压位置)<br><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">PATH</span>=<span class="hljs-variable">$PATH</span>:$HADOOP_HOME/sbin:$HADOOP_HOME/bin<br></code></pre></td></tr></table></figure>
+
+
+<p>集群需要修改的配置文件比伪分布式要多，只少修改5个配置文件，分别为Slave，core-site.xml，hdfs-site.xml，mapred-site.xml（需要重命名），yarn-site.xml，具体配置文件存放在hadoop目录下的etc/hadoop中。</p>
+<p>一、Slave（输入DataNode的域名)     </p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">Slave1</span><br>Slave2<br></code></pre></td></tr></table></figure>
+<p>二、core-site.xml    </p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-params">&lt;configuration&gt;</span><br>    <span class="hljs-params">&lt;property&gt;</span><br>        <span class="hljs-params">&lt;name&gt;</span>hadoop.tmp.dir<span class="hljs-params">&lt;/name&gt;</span><br>        <span class="hljs-params">&lt;value&gt;</span>file:<span class="hljs-meta-keyword">/home/</span>hadoop<span class="hljs-meta-keyword">/module/</span>hadoop<span class="hljs-number">-2.7</span><span class="hljs-number">.2</span>/tmp<span class="hljs-params">&lt;/value&gt;</span><br>    <span class="hljs-params">&lt;/property&gt;</span><br>    <span class="hljs-params">&lt;property&gt;</span><br>        <span class="hljs-params">&lt;name&gt;</span>fs.defaultFS<span class="hljs-params">&lt;/name&gt;</span><br>        <span class="hljs-params">&lt;value&gt;</span>hdfs:<span class="hljs-comment">//Master:9000&lt;/value&gt;</span><br>    <span class="hljs-params">&lt;/property&gt;</span><br><span class="hljs-params">&lt;/configuration&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>三、hdfs-site.xml    </p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs dts"><span class="hljs-params">&lt;/configuration&gt;</span><br>        <span class="hljs-params">&lt;property&gt;</span><br>                <span class="hljs-params">&lt;name&gt;</span>dfs.namenode.secondary.http-address<span class="hljs-params">&lt;/name&gt;</span><br>                <span class="hljs-params">&lt;value&gt;</span>Master:<span class="hljs-number">50090</span><span class="hljs-params">&lt;/value&gt;</span><br>        <span class="hljs-params">&lt;/property&gt;</span><br>        <span class="hljs-params">&lt;property&gt;</span><br>                <span class="hljs-params">&lt;name&gt;</span>dfs.replication<span class="hljs-params">&lt;/name&gt;</span><br>                <span class="hljs-params">&lt;value&gt;</span><span class="hljs-number">2</span><span class="hljs-params">&lt;/value&gt;</span><br>        <span class="hljs-params">&lt;/property&gt;</span><br>        <span class="hljs-params">&lt;property&gt;</span><br>                <span class="hljs-params">&lt;name&gt;</span>dfs.namenode.name.dir<span class="hljs-params">&lt;/name&gt;</span><br>                <span class="hljs-params">&lt;value&gt;</span>file:<span class="hljs-meta-keyword">/home/</span>hadoop<span class="hljs-meta-keyword">/module/</span>hadoop<span class="hljs-number">-2.7</span><span class="hljs-number">.2</span><span class="hljs-meta-keyword">/tmp/</span>dfs<span class="hljs-meta-keyword">/name/</span><span class="hljs-params">&lt;/value&gt;</span><br>        <span class="hljs-params">&lt;/property&gt;</span><br>        <span class="hljs-params">&lt;property&gt;</span><br>                <span class="hljs-params">&lt;name&gt;</span>dfs.datanode.data.dir<span class="hljs-params">&lt;/name&gt;</span><br>                <span class="hljs-params">&lt;value&gt;</span>file:<span class="hljs-meta-keyword">/home/</span>hadoop<span class="hljs-meta-keyword">/module/</span>hadoop<span class="hljs-number">-2.7</span><span class="hljs-number">.2</span><span class="hljs-meta-keyword">/tmp/</span>dfs<span class="hljs-meta-keyword">/data/</span><span class="hljs-params">&lt;/value&gt;</span><br>        <span class="hljs-params">&lt;/property&gt;</span><br><span class="hljs-params">&lt;/configuration&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>四、mapred-site.xml(需要将mapred-site.xml.template改名)</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.framework.name<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>yarn<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.jobhistory.address<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>Master:10020<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>mapreduce.jobhistory.webapp.address<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>Master:19888<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>五、yarn-site.xml  </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.resourcemanager.hostname<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>Master<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>yarn.nodemanager.aux-services<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>mapreduce_shuffle<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
 <hr>
 <p>在Master节点配置好后，可以用scp直接将Hadoop文件夹发送到Slave1、Slave2节点，免去重新修改配置文件的麻烦。    </p>
@@ -278,7 +236,7 @@
     
   <div class="nexmoe-post-copyright">
     <strong>本文作者：</strong>林肥皂<br>
-    <strong>本文链接：</strong><a href="https://838819583.github.io/2021/06/10/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" title="https:&#x2F;&#x2F;838819583.github.io&#x2F;2021&#x2F;06&#x2F;10&#x2F;Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;838819583.github.io&#x2F;2021&#x2F;06&#x2F;10&#x2F;Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&#x2F;</a><br>
+    <strong>本文链接：</strong><a href="https://838819583.github.io/2022/01/02/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/" title="https:&#x2F;&#x2F;838819583.github.io&#x2F;2022&#x2F;01&#x2F;02&#x2F;Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;838819583.github.io&#x2F;2022&#x2F;01&#x2F;02&#x2F;Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE&#x2F;</a><br>
     
       <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
     
@@ -337,11 +295,7 @@
         </div>
     </div>
   </div>
-  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,gh/highlightjs/cdn-release@9.15.8/build/highlight.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script>
-	hljs.initHighlightingOnLoad();
-</script>
-
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
@@ -349,7 +303,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1641056886603"></script>
+<script async src="/js/app.js?v=1641059208876"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
