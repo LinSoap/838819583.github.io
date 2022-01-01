@@ -12,28 +12,31 @@
   
 
   <link rel="shortcut icon" href="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" type="image/png" />
-  <meta name="description" content="统计目标使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为     数据准备使用搜狗搜索官方提供的搜索数据，其中包含”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“在要完成每小时Top10话题的统计，需要提取数据中的访问时间、查询词两个字段。搜狗搜索数据下载 实现思路统计每小时的Top1">
+  <meta name="description" content="统计目标使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为     数据准备使用搜狗搜索官方提供的搜索数据，其中包含”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“在要完成每小时Top10话题的统计，需要提取数据中的访问时间、查询词两个字段。搜狗搜索数据下载 实现思路统计每小时的Top">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mapreduce计算搜狗搜索数据每小时话题统计">
 <meta property="og:url" content="https://838819583.github.io/2021/12/31/Mapreduce%E8%AE%A1%E7%AE%97%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%95%B0%E6%8D%AE%E6%AF%8F%E5%B0%8F%E6%97%B6%E8%AF%9D%E9%A2%98%E7%BB%9F%E8%AE%A1/index.html">
 <meta property="og:site_name" content="LinSoap">
-<meta property="og:description" content="统计目标使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为     数据准备使用搜狗搜索官方提供的搜索数据，其中包含”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“在要完成每小时Top10话题的统计，需要提取数据中的访问时间、查询词两个字段。搜狗搜索数据下载 实现思路统计每小时的Top1">
+<meta property="og:description" content="统计目标使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为     数据准备使用搜狗搜索官方提供的搜索数据，其中包含”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“在要完成每小时Top10话题的统计，需要提取数据中的访问时间、查询词两个字段。搜狗搜索数据下载 实现思路统计每小时的Top">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s4.ax1x.com/2021/12/31/T4Dql6.png">
 <meta property="og:image" content="https://s4.ax1x.com/2022/01/02/ToeLYd.png">
 <meta property="og:image" content="https://s4.ax1x.com/2022/01/02/Toe5y6.png">
 <meta property="og:image" content="https://s4.ax1x.com/2022/01/02/Toe7wD.png">
 <meta property="article:published_time" content="2021-12-30T16:14:00.000Z">
-<meta property="article:modified_time" content="2022-01-01T16:44:35.236Z">
+<meta property="article:modified_time" content="2022-01-01T17:02:21.991Z">
 <meta property="article:author" content="林肥皂">
-<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="Mapreduce">
+<meta property="article:tag" content="搜狗数据实战">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s4.ax1x.com/2021/12/31/T4Dql6.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1641056344075">
+  <link rel="stylesheet" href="/css/style.css?v=1641056547521">
   
-  <link rel="stylesheet" href="/css/style.css?v=1641056344076">
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641056344076">
+  <link rel="stylesheet" href="/css/style.css?v=1641056547521">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641056547521">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -58,7 +61,7 @@
     </div>
     <div class="nexmoe-count">
         <div><span>文章</span>5</div>
-        <div><span>标签</span>4</div>
+        <div><span>标签</span>6</div>
         <div><span>分类</span>0</div>
     </div>
     <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
@@ -108,7 +111,7 @@
   
   <div class="nexmoe-widget-wrap">
     <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
-      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+      <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 20px;">Hadoop</a> <a href="/tags/Mapreduce/" style="font-size: 10px;">Mapreduce</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%90%9C%E7%8B%97%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%88%98/" style="font-size: 10px;">搜狗数据实战</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
     </div>
     
   </div>
@@ -143,7 +146,8 @@
 
     
 
-    <h1 id="统计目标"><a href="#统计目标" class="headerlink" title="统计目标"></a>统计目标</h1><p>使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为    <a target="_blank" rel="noopener" href="https://imgtu.com/i/T4Dql6"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2021/12/31/T4Dql6.png" alt="T4Dql6.png" class="lazyload"></a></p>
+    <span id="more"></span>
+<h1 id="统计目标"><a href="#统计目标" class="headerlink" title="统计目标"></a>统计目标</h1><p>使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为    <a target="_blank" rel="noopener" href="https://imgtu.com/i/T4Dql6"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2021/12/31/T4Dql6.png" alt="T4Dql6.png" class="lazyload"></a></p>
 <h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用搜狗搜索官方提供的搜索数据，其中包含<br>”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“<br>在要完成每小时Top10话题的统计，需要提取数据中的访问时间、查询词两个字段。<br><a target="_blank" rel="noopener" href="http://www.sogou.com/labs/resource/q.php">搜狗搜索数据下载</a></p>
 <h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>统计每小时的Top10话题，需要先根据访问时间进行分区，得到每个小时内所有的话题数，对该小时内相同的话题数进行累加，得到该小时所有话题及其总搜索数，得到总搜索数后，再对其进行排序并截取前10。由于先要进行分区再进行累加，所以一个mapreduce无法完成该任务，需要两个mapreduce，第一个mapreduce需要在map阶段获取时间字段与话题字段，在partition阶段完成每小时的分区，再在reduce阶段完成每小时内的累加。第二个mapreduce只需要在第一个的结果上完成分区，排序，取前10即可。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/ToeLYd"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/02/ToeLYd.png" alt="ToeLYd.png" class="lazyload"></a></p>
 <h2 id="第一次mapreduce实现"><a href="#第一次mapreduce实现" class="headerlink" title="第一次mapreduce实现"></a>第一次mapreduce实现</h2><p>在第一次mapreduce阶段，主要实现三个功能，map阶段从输入数据中获取时间，话题字段。partition阶段要依据时间的小时实现分区，reduce阶段要统计每小时内话题的出现次数。</p>
@@ -184,6 +188,8 @@
   
   <div class="nexmoe-post-meta nexmoe-rainbow">
     
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Hadoop/" rel="tag">Hadoop</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Mapreduce/" rel="tag">Mapreduce</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E6%90%9C%E7%8B%97%E6%95%B0%E6%8D%AE%E5%AE%9E%E6%88%98/" rel="tag">搜狗数据实战</a>
     
 </div>
 
@@ -242,7 +248,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1641056344085"></script>
+<script src="/js/app.js?v=1641056547530"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
