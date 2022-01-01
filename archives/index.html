@@ -21,10 +21,10 @@
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1641056547553">
+  <link rel="stylesheet" href="/css/style.css?v=1641056886618">
   
-  <link rel="stylesheet" href="/css/style.css?v=1641056547553">
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641056547553">
+  <link rel="stylesheet" href="/css/style.css?v=1641056886618">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641056886618">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -119,7 +119,7 @@
         <section class="nexmoe-posts">
     
     <div class="nexmoe-post">
-        <a href="/2021/12/31/Mapreduce%E8%AE%A1%E7%AE%97%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%95%B0%E6%8D%AE%E6%AF%8F%E5%B0%8F%E6%97%B6%E8%AF%9D%E9%A2%98%E7%BB%9F%E8%AE%A1/">
+        <a href="/2022/01/01/Mapreduce%E8%AE%A1%E7%AE%97%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%95%B0%E6%8D%AE%E6%AF%8F%E5%B0%8F%E6%97%B6%E8%AF%9D%E9%A2%98%E7%BB%9F%E8%AE%A1/">
             
                 <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
                     <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Mapreduce计算搜狗搜索数据每小时话题统计" class="lazyload">
@@ -129,38 +129,14 @@
         </a>
 
         <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年12月31日</a>
+            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月01日</a>
             <a><i class="nexmoefont icon-areachart"></i>1.2k 字</a>
             <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
         </div>
 
         <article>
             
-                <span id="more"></span>
-<h1 id="统计目标"><a href="#统计目标" class="headerlink" title="统计目标"></a>统计目标</h1><p>使用mapreduce离线计算搜狗搜索数据中每小时的Top10话题，依据小时生成24个分区，输出格式为    <a target="_blank" rel="noopener" href="https://imgtu.com/i/T4Dql6"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2021/12/31/T4Dql6.png" alt="T4Dql6.png" class="lazyload"></a></p>
-<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用搜狗搜索官方提供的搜索数据，其中包含<br>”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“<br>在要完成每小时Top10话题的统计，需要提取数据中的访问时间、查询词两个字段。<br><a target="_blank" rel="noopener" href="http://www.sogou.com/labs/resource/q.php">搜狗搜索数据下载</a></p>
-<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>统计每小时的Top10话题，需要先根据访问时间进行分区，得到每个小时内所有的话题数，对该小时内相同的话题数进行累加，得到该小时所有话题及其总搜索数，得到总搜索数后，再对其进行排序并截取前10。由于先要进行分区再进行累加，所以一个mapreduce无法完成该任务，需要两个mapreduce，第一个mapreduce需要在map阶段获取时间字段与话题字段，在partition阶段完成每小时的分区，再在reduce阶段完成每小时内的累加。第二个mapreduce只需要在第一个的结果上完成分区，排序，取前10即可。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/ToeLYd"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/02/ToeLYd.png" alt="ToeLYd.png" class="lazyload"></a></p>
-<h2 id="第一次mapreduce实现"><a href="#第一次mapreduce实现" class="headerlink" title="第一次mapreduce实现"></a>第一次mapreduce实现</h2><p>在第一次mapreduce阶段，主要实现三个功能，map阶段从输入数据中获取时间，话题字段。partition阶段要依据时间的小时实现分区，reduce阶段要统计每小时内话题的出现次数。</p>
-<p>map<br>输入的数据间由\t分割，其中第一个字段与第三个字段为时间和话题，使用split函数根据”\t”切分后，依据索引得到时间和话题，由于话题字段由[]包裹，使用replace函数去除即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class NewsMapper extends Mapper&lt;LongWritable,Text,Text,Text&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">        String line = new String(value.getBytes(),0,value.getLength(),&quot;GBK&quot;);</span><br><span class="line">        String[] spited = line.split(&quot;\t&quot;);</span><br><span class="line">        String date = spited[0];</span><br><span class="line">        String name = spited[2].replace(&quot;[&quot;,&quot;&quot;).replace(&quot;]&quot;,&quot;&quot;);</span><br><span class="line">        context.write(new Text(name),new Text(date));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>partition<br>map阶段的输出格式为&lt;话题,时间&gt;，在partition阶段只需要读取时间字段，时间字段的格式为hh:mm:dd，使用split依据”：“切分得到小时，或使用substring截取前两个数字都行。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class NewsPartitioner extends Partitioner&lt;Text, Text&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public int getPartition(Text name,Text inputdate, int i) &#123;</span><br><span class="line">        String date = inputdate.toString();</span><br><span class="line">        int partitionNum = Integer.parseInt(date.split(&quot;:&quot;)[0]);</span><br><span class="line">        return partitionNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>reducer<br>reduce阶段主要实现话题点击数的累加，只需要对values进行遍历，每执行一次count数加一。最后与date拼接当作value写出。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class NewsReducer extends Reducer&lt;Text, Text,Text, Text&gt; &#123;</span><br><span class="line">    String date;</span><br><span class="line">    @Override</span><br><span class="line">    protected void reduce(Text key, Iterable&lt;Text&gt; values, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">        Long count=0L;</span><br><span class="line">        for (Text value : values) &#123;</span><br><span class="line">            count += 1;</span><br><span class="line">            String date=value.toString();</span><br><span class="line">        &#125;</span><br><span class="line">        context.write(key,new Text(date+&quot;\t&quot;+count));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果</p>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/Toe5y6"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/02/Toe5y6.png" alt="Toe5y6.png" class="lazyload"></a></p>
-<h2 id="第二次mapreduce实现"><a href="#第二次mapreduce实现" class="headerlink" title="第二次mapreduce实现"></a>第二次mapreduce实现</h2><p>在第二次mapreduce阶段，主要要完成对每小时内话题的点击量的排序以及取前十的功能，由于仍要输出24个分片文件，故还要使用第一阶段自定义的partitioner。</p>
-<p>map<br>主要对第一阶段的输出文件读取话题，时间，话题点击数字段。由于map之后的Comparator阶段是对key进行排序，所以主要将话题点击数字段作为key阶段。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class NewsMapperSort extends Mapper&lt;LongWritable,Text, LongWritable,Text&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">        String line = new String(value.getBytes(),0,value.getLength(),&quot;UTF-8&quot;);</span><br><span class="line">        String[] spited = line.split(&quot;\t&quot;);</span><br><span class="line">        String name = spited[0];</span><br><span class="line">        String date = spited[1];</span><br><span class="line">        Long count = Long.parseLong(spited[2]);</span><br><span class="line">        context.write(new LongWritable(count),new Text(name+&quot;\t&quot;+date));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>partition<br>思路与第一阶段相同</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class NewsPartitioner extends Partitioner&lt;LongWritable, Text&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public int getPartition(LongWritable longWritable, Text text, int i) &#123;</span><br><span class="line">        String date = text.toString().split(&quot;\t&quot;)[1];</span><br><span class="line">        int partitionNum=Integer.parseInt(date.split(&quot;:&quot;)[0]);</span><br><span class="line">        return partitionNum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>Comparator<br>Comparator自带是采用顺序的方法排序，只需要倒反Comparable的返回值即可实现倒叙。<br>注意重写compare的参数不能是object，会导致Compartor不生效。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class NewsComparator extends WritableComparator &#123;</span><br><span class="line">    public  NewsComparator() &#123;</span><br><span class="line">        super(LongWritable.class,true);</span><br><span class="line">    &#125;</span><br><span class="line">    @Override</span><br><span class="line">    public int compare(WritableComparable a, WritableComparable b) &#123;</span><br><span class="line">        return -super.compare(a, b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>reduce<br>在输出结果中有要求将时间按小时取整，取出date使用substring提取小时拼接整点的分钟和秒即可。仅输出10条数据使用if条件判断输出条数即可。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public class NewsReducerSort extends Reducer&lt;LongWritable,Text,Text,LongWritable&gt; &#123;</span><br><span class="line">    int i =0;</span><br><span class="line">    @Override</span><br><span class="line">    protected void reduce(LongWritable key, Iterable&lt;Text&gt; values, Context context) throws IOException, InterruptedException &#123;</span><br><span class="line">        if (i &lt; 10) &#123;</span><br><span class="line">            for (Text value : values) &#123;</span><br><span class="line">                String text = value.toString();</span><br><span class="line">                String name = text.split(&quot;\t&quot;)[0];</span><br><span class="line">                String date = text.split(&quot;\t&quot;)[1].substring(0, 2) + &quot;:00:00&quot;;</span><br><span class="line">                context.write(new Text(date + &quot;\t&quot; + name), key);</span><br><span class="line">                i += 1;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出结果<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/Toe7wD"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/02/Toe7wD.png" alt="Toe7wD.png" class="lazyload"></a></p>
-
+                <p>好久没更新了，希望在新的一年能坚持下去。</p>
             
         </article>
     </div>
@@ -292,7 +268,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script src="/js/app.js?v=1641056547554"></script>
+<script src="/js/app.js?v=1641056886618"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
