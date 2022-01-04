@@ -4,7 +4,7 @@
 
 <head>
   
-  <title>文章归档 - LinSoap</title>
+  <title>搜狗搜索日志实时展示项目(数据传输部分) - LinSoap</title>
   <meta charset="UTF-8">
   <meta name="description" content="">
   <meta name="keywords" content="Blog">
@@ -13,18 +13,26 @@
   
 
   <link rel="shortcut icon" href="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" type="image/png" />
-  <meta property="og:type" content="website">
-<meta property="og:title" content="LinSoap">
-<meta property="og:url" content="https://838819583.github.io/archives/index.html">
+  <meta name="description" content="项目介绍本项目仍然使用搜狗官方公布的搜索数据，通过脚本模拟用户提交搜索，数据传输部分使用flume与kafka，在数据实时计算使用SparkStreaming,将计算结果存入mysql数据库，在数据展示方面使用Tomcat作为Web应用服务器，用websocket完成socket协议，从mysql中读取数据并通过Echarts展示。集群规划     数据准备使用搜狗搜索官方提供的搜索数据，其中包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜狗搜索日志实时展示项目(数据传输部分)">
+<meta property="og:url" content="https://838819583.github.io/2022/01/04/%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%97%A5%E5%BF%97%E5%AE%9E%E6%97%B6%E5%B1%95%E7%A4%BA%E9%A1%B9%E7%9B%AE-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86/index.html">
 <meta property="og:site_name" content="LinSoap">
+<meta property="og:description" content="项目介绍本项目仍然使用搜狗官方公布的搜索数据，通过脚本模拟用户提交搜索，数据传输部分使用flume与kafka，在数据实时计算使用SparkStreaming,将计算结果存入mysql数据库，在数据展示方面使用Tomcat作为Web应用服务器，用websocket完成socket协议，从mysql中读取数据并通过Echarts展示。集群规划     数据准备使用搜狗搜索官方提供的搜索数据，其中包含">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s4.ax1x.com/2022/01/04/TqqsTx.png">
+<meta property="og:image" content="https://s4.ax1x.com/2022/01/04/TOkls1.png">
+<meta property="og:image" content="https://s4.ax1x.com/2022/01/04/TOiwfH.png">
+<meta property="article:published_time" content="2022-01-03T16:52:52.000Z">
+<meta property="article:modified_time" content="2022-01-04T11:56:15.233Z">
 <meta property="article:author" content="林肥皂">
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s4.ax1x.com/2022/01/04/TqqsTx.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1641297383921">
+  <link rel="stylesheet" href="/css/style.css?v=1641297383845">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641297383921">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641297383845">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -116,27 +124,25 @@
   </div>
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
-        <section class="nexmoe-posts">
+        <div class="nexmoe-post">
+
+  <article>
     
-    <div class="nexmoe-post">
-        <a href="/2022/01/04/%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%97%A5%E5%BF%97%E5%AE%9E%E6%97%B6%E5%B1%95%E7%A4%BA%E9%A1%B9%E7%9B%AE-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="搜狗搜索日志实时展示项目(数据传输部分)" class="lazyload">
-                    <h1>搜狗搜索日志实时展示项目(数据传输部分)</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月04日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.2k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+            <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="搜狗搜索日志实时展示项目(数据传输部分)" class="lazyload">
+            <h1>搜狗搜索日志实时展示项目(数据传输部分)</h1>
         </div>
+    
+    
+    <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月04日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.2k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+</div>
 
-        <article>
-            
-                <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>本项目仍然使用搜狗官方公布的搜索数据，通过脚本模拟用户提交搜索，数据传输部分使用flume与kafka，在数据实时计算使用SparkStreaming,将计算结果存入mysql数据库，在数据展示方面使用Tomcat作为Web应用服务器，用websocket完成socket协议，从mysql中读取数据并通过Echarts展示。<br>集群规划    </p>
+    
+
+    <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>本项目仍然使用搜狗官方公布的搜索数据，通过脚本模拟用户提交搜索，数据传输部分使用flume与kafka，在数据实时计算使用SparkStreaming,将计算结果存入mysql数据库，在数据展示方面使用Tomcat作为Web应用服务器，用websocket完成socket协议，从mysql中读取数据并通过Echarts展示。<br>集群规划    </p>
 <h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用搜狗搜索官方提供的搜索数据，其中包含<br>”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“<br><a target="_blank" rel="noopener" href="http://www.sogou.com/labs/resource/q.php">搜狗搜索数据下载</a></p>
 <h2 id="数据传输部分思路"><a href="#数据传输部分思路" class="headerlink" title="数据传输部分思路"></a>数据传输部分思路</h2><p>本文使用shell脚本生成数据，主要实现每隔特定时间按行读取数据源并输出到特定文件，使用flume监听该文件并通过avro将数据聚集到一个flume，模拟生产环境中多个数据源的情况。最后通过这个该flume传输到kafka做消息队列，实现主题，方便多个消费者使用数据。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/TqqsTx"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/04/TqqsTx.png" alt="TqqsTx.png" class="lazyload"></a>    </p>
 <h3 id="Shell脚本编写"><a href="#Shell脚本编写" class="headerlink" title="Shell脚本编写"></a>Shell脚本编写</h3><p>为了模拟用户搜索提交信息到服务器，本文使用shell脚本进行定时读取原搜索数据输出到新文件，该Shell脚本主要实现，按行读取初始数据，将数据中的”/t”转换为”,”，每隔一定时间追加到特定文件。<br>在hadoop1新建脚本create_Log.sh</p>
@@ -162,131 +168,45 @@
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/TOiwfH"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/04/TOiwfH.png" alt="TOiwfH.png" class="lazyload"></a></p>
 <p>成功启动kafka服务后，就可以启动hadoop3上的flume以及hadoop1上的flume了，最后使用kafka-console-consumer.sh查看是否能够成功订阅weblog主题。</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span>在hadoop3上<br>nohup flune-ng <span class="hljs-params">--name</span> a3 <span class="hljs-params">--conf-file</span> flume-kafka &amp;<br><br><span class="hljs-string">//</span>在hadoop1上<br>nohup flume-ng <span class="hljs-params">--name</span> a1 <span class="hljs-params">--conf-file</span> flume-sogou.conf &amp;<br><br><span class="hljs-string">//</span>任意虚拟机上订阅weblog主题<br>kafka-console-consumer.sh <span class="hljs-params">--topic</span> weblog <span class="hljs-params">--bootsrap-server</span> hadoop3<span class="hljs-function">:9092</span><br></code></pre></td></tr></table></figure>
-            
-        </article>
-    </div>
+  </article>
+
+  
     
-    <div class="nexmoe-post">
-        <a href="/2022/01/02/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Hadoop集群安装与配置" class="lazyload">
-                    <h1>Hadoop集群安装与配置</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月02日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.5k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>一般学习Hadoop中的组件，使用伪分布式就够用了，但是老师突然要求写一篇关于集群搭建的博客，那就写在自己的博客上吧，顺便丰富一下博客内容。</p>
-            
-        </article>
-    </div>
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>林肥皂<br>
+    <strong>本文链接：</strong><a href="https://838819583.github.io/2022/01/04/%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%97%A5%E5%BF%97%E5%AE%9E%E6%97%B6%E5%B1%95%E7%A4%BA%E9%A1%B9%E7%9B%AE-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86/" title="https:&#x2F;&#x2F;838819583.github.io&#x2F;2022&#x2F;01&#x2F;04&#x2F;%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%97%A5%E5%BF%97%E5%AE%9E%E6%97%B6%E5%B1%95%E7%A4%BA%E9%A1%B9%E7%9B%AE-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;838819583.github.io&#x2F;2022&#x2F;01&#x2F;04&#x2F;%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%97%A5%E5%BF%97%E5%AE%9E%E6%97%B6%E5%B1%95%E7%A4%BA%E9%A1%B9%E7%9B%AE-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86&#x2F;</a><br>
     
-    <div class="nexmoe-post">
-        <a href="/2022/01/01/Mapreduce%E8%AE%A1%E7%AE%97%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%95%B0%E6%8D%AE%E6%AF%8F%E5%B0%8F%E6%97%B6%E8%AF%9D%E9%A2%98%E7%BB%9F%E8%AE%A1/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Mapreduce计算搜狗搜索数据每小时话题统计" class="lazyload">
-                    <h1>Mapreduce计算搜狗搜索数据每小时话题统计</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月01日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.2k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>好久没更新了，希望在新的一年能坚持。</p>
-            
-        </article>
-    </div>
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
     
-    <div class="nexmoe-post">
-        <a href="/2021/06/09/Java-API%E5%A4%96%E7%BD%91%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE%E4%BA%91%E4%B8%BB%E6%9C%BAHDFS-datanode/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Java API外网无法访问云主机HDFS datanode" class="lazyload">
-                    <h1>Java API外网无法访问云主机HDFS datanode</h1>
-                </div>
-            
-        </a>
+  </div>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年06月09日</a>
-            <a><i class="nexmoefont icon-areachart"></i>458 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
 
-        <article>
-            
-                <p>博主目前使用腾讯云+伪分布式的环境学习Hadoop框架，与一般的本地虚拟机+伪分布式环境相比，其中还是有一些区别的,会导致一些意外的错误。  </p>
-            
-        </article>
-    </div>
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
     
-    <div class="nexmoe-post">
-        <a href="/2021/05/25/Hadoop%E6%A1%86%E6%9E%B6%E6%80%BB%E8%A7%88/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Hadoop框架总览" class="lazyload">
-                    <h1>Hadoop框架总览</h1>
-                </div>
-            
-        </a>
-
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年05月25日</a>
-            <a><i class="nexmoefont icon-areachart"></i>1.4k 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
-        </div>
-
-        <article>
-            
-                <p>博主是大数据相关专业在学，目前已经跟着学校学习了一年多了，对大数据的一些框架有了初步的了解。之前也没有对知识进行梳理和总结。刚好，现在博客空空荡荡的，就先开一个坑。之后慢慢补充。</p>
-            
-        </article>
-    </div>
     
-    <div class="nexmoe-post">
-        <a href="/2021/05/24/about/">
-            
-                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
-                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="关于" class="lazyload">
-                    <h1>关于</h1>
-                </div>
-            
-        </a>
+</div>
 
-        <div class="nexmoe-post-meta nexmoe-rainbow">
-            <a><i class="nexmoefont icon-calendar-fill"></i>2021年05月24日</a>
-            <a><i class="nexmoefont icon-areachart"></i>102 字</a>
-            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
-        </div>
-
-        <article>
-            
-                <h3 id="关于博客"><a href="#关于博客" class="headerlink" title="关于博客"></a>关于博客</h3><p>该博客主要记录本人的学习、生活、兴趣爱好等文章，由于本人好吃懒做，该博客更新时间和频率完全随缘。</p>
-<hr>
-<h3 id="关于本人"><a href="#关于本人" class="headerlink" title="关于本人"></a>关于本人</h3><p>博主是某不知名大专的大二学生，大数据相关专业在熬，热爱技术，喜欢臭打游戏。<br>先写这么多，以后想到什么再更新吧。</p>
-<hr>
-<h3 id="待更新"><a href="#待更新" class="headerlink" title="待更新"></a>待更新</h3>
-            
-        </article>
-    </div>
-    
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '68366cc70a9833c51a97',
+        clientSecret: '4043816fe5bed0fd7abdd41d0b72f7904cdb7fc9 ',
+        id: window.location.pathname,
+        repo: '838819583.github.io',
+        owner: '838819583',
+        admin: '838819583'
+    })
+    gitalk.render('gitalk')
+</script>
 </section>
-
+  </div>
+</div>
         <div class="nexmoe-post-right">
           <div class="nexmoe-fixed">
             <div class="nexmoe-tool"> 
@@ -294,6 +214,13 @@
                 
                   
                   
+                  
+                    <button class="mdui-fab catalog mdui-ripple" style="overflow:unset;">
+                      <i class="nexmoefont icon-i-catalog"></i>
+                      <div class="nexmoe-toc">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">项目介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">1.1.</span> <span class="toc-text">数据准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86%E6%80%9D%E8%B7%AF"><span class="toc-number">1.2.</span> <span class="toc-text">数据传输部分思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Shell%E8%84%9A%E6%9C%AC%E7%BC%96%E5%86%99"><span class="toc-number">1.2.1.</span> <span class="toc-text">Shell脚本编写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E5%90%AC%E6%96%87%E4%BB%B6flume%E9%85%8D%E7%BD%AE"><span class="toc-number">1.2.2.</span> <span class="toc-text">监听文件flume配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#kafka%E6%B6%88%E8%B4%B9%E4%B8%BB%E9%A2%98"><span class="toc-number">1.3.</span> <span class="toc-text">kafka消费主题</span></a></li></ol></li></ol>
+                      </div>
+                    </button>
                   
                     
                 
@@ -312,7 +239,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1641297383922"></script>
+<script async src="/js/app.js?v=1641297383858"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

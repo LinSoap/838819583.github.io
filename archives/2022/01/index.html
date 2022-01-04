@@ -22,9 +22,9 @@
 <meta property="article:tag" content="Blog">
 <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1641060057447">
+  <link rel="stylesheet" href="/css/style.css?v=1641297383925">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641060057447">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1641297383925">
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -48,7 +48,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>文章</span>5</div>
+        <div><span>文章</span>6</div>
         <div><span>标签</span>4</div>
         <div><span>分类</span>0</div>
     </div>
@@ -117,6 +117,54 @@
   <div id="nexmoe-content">
     <div class="nexmoe-primary">
         <section class="nexmoe-posts">
+    
+    <div class="nexmoe-post">
+        <a href="/2022/01/04/%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%97%A5%E5%BF%97%E5%AE%9E%E6%97%B6%E5%B1%95%E7%A4%BA%E9%A1%B9%E7%9B%AE-%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E9%83%A8%E5%88%86/">
+            
+                <div class="nexmoe-post-cover mdui-ripple" style="padding-bottom: 66.66666666666666%;"> 
+                    <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="搜狗搜索日志实时展示项目(数据传输部分)" class="lazyload">
+                    <h1>搜狗搜索日志实时展示项目(数据传输部分)</h1>
+                </div>
+            
+        </a>
+
+        <div class="nexmoe-post-meta nexmoe-rainbow">
+            <a><i class="nexmoefont icon-calendar-fill"></i>2022年01月04日</a>
+            <a><i class="nexmoefont icon-areachart"></i>1.2k 字</a>
+            <a><i class="nexmoefont icon-time-circle-fill"></i>大概 5 分钟</a>
+        </div>
+
+        <article>
+            
+                <h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>本项目仍然使用搜狗官方公布的搜索数据，通过脚本模拟用户提交搜索，数据传输部分使用flume与kafka，在数据实时计算使用SparkStreaming,将计算结果存入mysql数据库，在数据展示方面使用Tomcat作为Web应用服务器，用websocket完成socket协议，从mysql中读取数据并通过Echarts展示。<br>集群规划    </p>
+<h2 id="数据准备"><a href="#数据准备" class="headerlink" title="数据准备"></a>数据准备</h2><p>使用搜狗搜索官方提供的搜索数据，其中包含<br>”访问时间\t用户ID\t[查询词]\t该URL在返回结果中的排名\t用户点击的顺序号\t用户点击的URL“<br><a target="_blank" rel="noopener" href="http://www.sogou.com/labs/resource/q.php">搜狗搜索数据下载</a></p>
+<h2 id="数据传输部分思路"><a href="#数据传输部分思路" class="headerlink" title="数据传输部分思路"></a>数据传输部分思路</h2><p>本文使用shell脚本生成数据，主要实现每隔特定时间按行读取数据源并输出到特定文件，使用flume监听该文件并通过avro将数据聚集到一个flume，模拟生产环境中多个数据源的情况。最后通过这个该flume传输到kafka做消息队列，实现主题，方便多个消费者使用数据。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/TqqsTx"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/04/TqqsTx.png" alt="TqqsTx.png" class="lazyload"></a>    </p>
+<h3 id="Shell脚本编写"><a href="#Shell脚本编写" class="headerlink" title="Shell脚本编写"></a>Shell脚本编写</h3><p>为了模拟用户搜索提交信息到服务器，本文使用shell脚本进行定时读取原搜索数据输出到新文件，该Shell脚本主要实现，按行读取初始数据，将数据中的”/t”转换为”,”，每隔一定时间追加到特定文件。<br>在hadoop1新建脚本create_Log.sh</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -ne 3 ] ; <span class="hljs-keyword">then</span><br> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;usage <span class="hljs-variable">$0</span>   src_file  dst_file frequence&quot;</span><br> <span class="hljs-built_in">exit</span><br><span class="hljs-keyword">fi</span><br><span class="hljs-keyword">while</span>  <span class="hljs-built_in">read</span> line ;<span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$line</span> | tr <span class="hljs-string">&#x27;\t&#x27;</span> <span class="hljs-string">&#x27;,&#x27;</span> &gt;&gt; <span class="hljs-variable">$2</span> ; sleep <span class="hljs-variable">$3</span> ; <span class="hljs-keyword">done</span> &lt; <span class="hljs-variable">$1</span><br></code></pre></td></tr></table></figure>
+<p>完成脚本编写后，添加执行权限。执行脚本即可实现特定文件每隔一段时间新增数据。<br>使用nohup+&amp;将脚本挂在后台执行。</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">//</span>执行脚本<br>nohup create_Log 输入文件 输出文件 间隔时间 &amp;<br><span class="hljs-regexp">//</span>查看输出结果<br>tail -f 输出文件<br></code></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/TOkls1"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/04/TOkls1.png" alt="TOkls1.png" class="lazyload"></a></p>
+<h3 id="监听文件flume配置"><a href="#监听文件flume配置" class="headerlink" title="监听文件flume配置"></a>监听文件flume配置</h3><p>在使用shell脚本成功将搜索数据按照一定时间间隔输入到新文件时，此时用flume监听该文件，得到新添加的数据。    </p>
+<p>首先先安装flume，在hadoop1,hadoop3下载并解压flume以及完成环境变量配置。<a target="_blank" rel="noopener" href="https://flume.apache.org/">flume下载地址</a>    </p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">tar -zxf 解压包 -C 目标路径   <br><span class="hljs-regexp">//</span>在.bashrc中添加<br>export FLUME_HOME=flume路径<br>export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$FLUME_HOME</span>/bin<br><span class="hljs-regexp">//</span>刷新环境变量文件。<br>source ~/.bashrc<br></code></pre></td></tr></table></figure>
+<p>在hadoop1上要完成flume监听本地文件，并将得到的数据传输到hadoop3上的flume<br>hadoop1新建配置文件flume-sogou.conf  </p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 设置agent name为a1，并绑定sources为r1，sinks为k1,channels为c1</span><br><br><span class="hljs-attr">a1.sources</span> = r1<br><span class="hljs-attr">a1.sinks</span> = k1<br><span class="hljs-attr">a1.channels</span> = c1<br><br><span class="hljs-comment"># source配置为exec类型，执行command指令</span><br><span class="hljs-attr">a1.sources.r1.type</span> = exec<br><span class="hljs-attr">a1.sources.r1.command</span> = tail -F 被监听文件<br><span class="hljs-attr">a1.sources.r1.shell</span> = /bin/bash -c<br><br><span class="hljs-comment"># sink配置为avro类型，将sources产生的数据传输到hadoop3的flume上</span><br><br><span class="hljs-attr">a1.sinks.k1.type</span> = avro<br><span class="hljs-attr">a1.sinks.k1.hostname</span> = hadoop3<br><span class="hljs-attr">a1.sinks.k1.port</span> = <span class="hljs-number">4141</span><br><br><span class="hljs-comment"># channel</span><br><br><span class="hljs-attr">a1.channels.c1.type</span> = memory<br><span class="hljs-attr">a1.channels.c1.capacity</span> = <span class="hljs-number">10000</span><br><span class="hljs-attr">a1.channels.c1.transactionCapacity</span> = <span class="hljs-number">10000</span><br><br><span class="hljs-attr">a1.sources.r1.channels</span> = c1<br><span class="hljs-attr">a1.sinks.k1.channel</span> =  c1<br></code></pre></td></tr></table></figure>
+<p>在hadoop3上要完成接收hadoop1中flume传输来的数据并传输到kafka特定主题上。<br>hadoop3上新建配置文件flume-kafka.conf</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-comment"># 设置agent name为a3，并绑定sources为r1，sinks为k1,channels为c1</span><br><br><span class="hljs-attr">a3.sources</span> = r1<br><span class="hljs-attr">a3.sinks</span> = k1<br><span class="hljs-attr">a3.channels</span> = c1<br><br><span class="hljs-comment"># source为avro类型，用于接受hadoop1上传输来的数据</span><br><span class="hljs-attr">a3.sources.r1.type</span> = avro<br><span class="hljs-attr">a3.sources.r1.bind</span> = hadoop3<br><span class="hljs-attr">a3.sources.r1.port</span> = <span class="hljs-number">4141</span><br><br><span class="hljs-comment"># sink为KafkaSink，用于将source的数据传输到kafka上的weblog主题</span><br><br><span class="hljs-attr">a3.sinks.k1.type</span> = org.apache.flume.sink.kafka.KafkaSink<br><span class="hljs-attr">a3.sinks.k1.kafka.bootstrap.servers</span> = hadoop1:<span class="hljs-number">9092</span>,hadoop2:<span class="hljs-number">9092</span>,hadoop3:<span class="hljs-number">9092</span><br><span class="hljs-attr">a3.sinks.k1.kafka.topic</span> = weblog<br><span class="hljs-attr">a3.sinks.k1.parseAsFlumeEvent</span> = <span class="hljs-literal">false</span><br><span class="hljs-comment"># channel</span><br><br><span class="hljs-attr">a3.channels.c1.type</span> = memory<br><span class="hljs-attr">a3.channels.c1.capacity</span> = <span class="hljs-number">10000</span><br><span class="hljs-attr">a3.channels.c1.transactionCapacity</span> = <span class="hljs-number">10000</span><br><br><span class="hljs-attr">a3.sources.r1.channels</span> = c1<br><span class="hljs-attr">a3.sinks.k1.channel</span> =  c1<br></code></pre></td></tr></table></figure>
+
+<p>完成配置信息后，由于kafka还没安装，hadoop3的flume无法连接到kafka导致启动失败，并且由于hadoop1上的数据需要传输到hadoop3，出于avro的限制，要先将hadoop3上的flume任务启动，再将hadoop1上的flume任务启动，所以在未启动kafka服务之前，这两个flume任务无法使用。</p>
+<h2 id="kafka消费主题"><a href="#kafka消费主题" class="headerlink" title="kafka消费主题"></a>kafka消费主题</h2><p>在三台虚拟机上安装kafka并设置环境变量。<br><a target="_blank" rel="noopener" href="https://kafka.apache.org/">kafka下载地址</a></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs awk">tar -zxf 解压包 -C 目标路径   <br><span class="hljs-regexp">//</span>配置kafka使用zookeeper服务器，修改conf文件夹内server.properties文件zookeeper.connet、log.dirs属性。<br>log.dirs=flume路径/data<br>zookeeper.connent=hadoop1:<span class="hljs-number">2181</span>,hadoop2:<span class="hljs-number">2181</span>,hadoop3:<span class="hljs-number">2181</span><br><span class="hljs-regexp">//</span>在.bashrc中添加<br>export KAFKA_HOME=kafka路径<br>export PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$KAFKA_HOME</span>/bin<br><span class="hljs-regexp">//</span>刷新环境变量文件。<br>source ~/.bashrc<br></code></pre></td></tr></table></figure>
+
+<p>在安装完成后，确定zookeeper服务已经启动，在三台虚拟机上启动kafka服务</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">bin/kafka-<span class="hljs-keyword">server</span>-<span class="hljs-keyword">start</span>.sh conf/<span class="hljs-keyword">server</span>.properties<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/TOiwfH"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s4.ax1x.com/2022/01/04/TOiwfH.png" alt="TOiwfH.png" class="lazyload"></a></p>
+<p>成功启动kafka服务后，就可以启动hadoop3上的flume以及hadoop1上的flume了，最后使用kafka-console-consumer.sh查看是否能够成功订阅weblog主题。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-string">//</span>在hadoop3上<br>nohup flune-ng <span class="hljs-params">--name</span> a3 <span class="hljs-params">--conf-file</span> flume-kafka &amp;<br><br><span class="hljs-string">//</span>在hadoop1上<br>nohup flume-ng <span class="hljs-params">--name</span> a1 <span class="hljs-params">--conf-file</span> flume-sogou.conf &amp;<br><br><span class="hljs-string">//</span>任意虚拟机上订阅weblog主题<br>kafka-console-consumer.sh <span class="hljs-params">--topic</span> weblog <span class="hljs-params">--bootsrap-server</span> hadoop3<span class="hljs-function">:9092</span><br></code></pre></td></tr></table></figure>
+            
+        </article>
+    </div>
     
     <div class="nexmoe-post">
         <a href="/2022/01/02/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">
@@ -191,7 +239,7 @@
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1641060057448"></script>
+<script async src="/js/app.js?v=1641297383926"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
