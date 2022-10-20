@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>Pyecharts各图输入数据格式 - LinSoap</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" type="image/png" />
+  <meta name="description" content="整理了一下Pyechats常见的图标输入数据格式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Pyecharts各图输入数据格式">
+<meta property="og:url" content="https://838819583.github.io/2022/05/07/Pyechars%E5%90%84%E5%9B%BE%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/index.html">
+<meta property="og:site_name" content="LinSoap">
+<meta property="og:description" content="整理了一下Pyechats常见的图标输入数据格式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OMrBiq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OMrwon.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OMrDJ0.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OMrdds.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OMraZj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OM6CZQ.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OM6xYR.png">
+<meta property="og:image" content="https://s1.ax1x.com/2022/05/07/OMf1Fe.png">
+<meta property="article:published_time" content="2022-05-07T02:31:35.000Z">
+<meta property="article:modified_time" content="2022-10-20T03:36:10.823Z">
+<meta property="article:author" content="林肥皂">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="pyecharts">
+<meta property="article:tag" content="可视化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2022/05/07/OMrBiq.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=1666237180904">
+  
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666237180904">
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://z3.ax1x.com/2021/05/25/gxIsL8.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="林肥皂" class="mdui-btn mdui-btn-icon"><img src="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" alt="林肥皂"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="林肥皂">
+            <img src="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" alt="林肥皂" alt="林肥皂">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>11</div>
+        <div><span>标签</span>15</div>
+        <div><span>分类</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=site:linsoap.icu# https://www.google.com/search?q={你的博客链接}" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://steamcommunity.com/id/838819583/" target="_blank" mdui-tooltip="{content: 'Steam'}" style="color: rgb(76, 128, 187);background-color: rgba(76, 128, 187, .15);">
+            <i class="nexmoefont icon-steam"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/8683142" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/838819583" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(153, 255, 255);background-color: rgba(153, 255, 255, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/lin-wei-jian-45-53" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(0, 102, 255);background-color: rgba(0, 102, 255, .15);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/2022%E8%81%8C%E4%B8%9A%E6%8A%80%E8%83%BD%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/" style="font-size: 10px;">2022职业技能大数据竞赛</a> <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 16.67px;">Hadoop</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flume/" style="font-size: 10px;">flume</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/pyecharts/" style="font-size: 10px;">pyecharts</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/spark/" style="font-size: 13.33px;">spark</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 10px;">可视化</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%95%B0%E6%8D%AE/" style="font-size: 13.33px;">搜狗搜索数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2022 林肥皂
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        true
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+            <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="Pyecharts各图输入数据格式" class="lazyload">
+            <h1>Pyecharts各图输入数据格式</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年05月07日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.4k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 7 分钟</a>
+</div>
+
+    
+
+    <p>整理了一下Pyechats常见的图标输入数据格式</p>
+<span id="more"></span>
+<p>最近在学习使用pyecharts做一些数据可视化，pyechars在制作各种图标的时候流程几乎一样，但是对于输入数据的格式要求不同，官方文档描述的也不清楚，所有在此重新记录和梳理一下各图表的输入数据格式。</p>
+<h1 id="直角坐标系类图形"><a href="#直角坐标系类图形" class="headerlink" title="直角坐标系类图形"></a>直角坐标系类图形</h1><p>直角坐标系类图表包括柱状图\条形图(Bar)、箱型图(Boxplot)、涟漪特效散点图(EffectScatter),热力图(HeatMap)，折线图\面积图(Line),象形柱状图(PictorialBar),散点图(Scatter)，以及k线图(Kline)。<br>直角坐标系最重要的就是x、y轴的设置了，在这类图表中，都有add_xaxis和add_yaxis方法，所有图表add_xaxis的输入都相同，都是包含x轴坐标标签的列表，但是对于不同图表，add_yaxis的方法会有所不同。</p>
+<h2 id="柱状-条形图、涟漪特效散点图、折线-面积图、象形柱状图、散点图"><a href="#柱状-条形图、涟漪特效散点图、折线-面积图、象形柱状图、散点图" class="headerlink" title="柱状\条形图、涟漪特效散点图、折线\面积图、象形柱状图、散点图"></a>柱状\条形图、涟漪特效散点图、折线\面积图、象形柱状图、散点图</h2><p>观察函数签名<br>Bar<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OMrBiq"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OMrBiq.png" alt="OMrBiq.png" class="lazyload"></a><br>EffectScatter<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OMrwon"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OMrwon.png" alt="OMrwon.png" class="lazyload"></a><br>Line  </p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/OMrDJ0"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OMrDJ0.png" alt="OMrDJ0.png" class="lazyload"></a>    </p>
+<p>PictorialBar<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OMrdds"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OMrdds.png" alt="OMrdds.png" class="lazyload"></a><br>Scatter  </p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/OMraZj"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OMraZj.png" alt="OMraZj.png" class="lazyload"></a><br>这些图表对于add_yaxis的要求都是一个包含y数据的列表或者包含该图表item的列表，其中y值只有一个。<br>输入类型一</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">ydata</span> = [<span class="hljs-number">143</span>, <span class="hljs-number">147</span>, <span class="hljs-number">112</span>, <span class="hljs-number">105</span>, <span class="hljs-number">87</span>, <span class="hljs-number">43</span>, <span class="hljs-number">127</span>]<br></code></pre></td></tr></table></figure>
+<p>输入类型二(以Bar为例)</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">data = [opts.BarItem(<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;商家A&quot;</span>,value=143),<br>        opts.BarItem(<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;商家A&quot;</span>,value=147),<br>        opts.BarItem(<span class="hljs-attribute">name</span>=<span class="hljs-string">&quot;商家A&quot;</span>,value=112)]<br></code></pre></td></tr></table></figure>
+<h2 id="箱型图"><a href="#箱型图" class="headerlink" title="箱型图"></a>箱型图</h2><p>先观察函数签名，发现输入要求貌似与上面那些图表相同<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OM6CZQ"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OM6CZQ.png" alt="OM6CZQ.png" class="lazyload"></a><br>再观察opts.BoxplotItem函数前面,就会发现item的value要求输入一个Sqequence，所以箱型图的输入数据还是与以上图表不同。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/OM6xYR"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OM6xYR.png" alt="OM6xYR.png" class="lazyload"></a><br>输入类型一</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs inform7">data = <span class="hljs-comment">[</span><br><span class="hljs-comment">    <span class="hljs-comment">[850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980]</span>,</span><br><span class="hljs-comment">    <span class="hljs-comment">[960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790]</span>,</span><br><span class="hljs-comment">]</span><br></code></pre></td></tr></table></figure>
+<p>输入类型二</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix"><span class="hljs-attr">data</span> = [opts.BoxplotItem(<span class="hljs-string">&quot;商家A&quot;</span>,<span class="hljs-attr">value=[850,</span> <span class="hljs-number">740</span>, <span class="hljs-number">900</span>, <span class="hljs-number">1070</span>, <span class="hljs-number">930</span>, <span class="hljs-number">850</span>, <span class="hljs-number">950</span>, <span class="hljs-number">980</span>, <span class="hljs-number">980</span>, <span class="hljs-number">880</span>, <span class="hljs-number">1000</span>, <span class="hljs-number">980</span>]),<br>        opts.BoxplotItem(<span class="hljs-string">&quot;商家A&quot;</span>,<span class="hljs-attr">value=[960,</span> <span class="hljs-number">940</span>, <span class="hljs-number">960</span>, <span class="hljs-number">940</span>, <span class="hljs-number">880</span>, <span class="hljs-number">800</span>, <span class="hljs-number">850</span>, <span class="hljs-number">880</span>, <span class="hljs-number">900</span>, <span class="hljs-number">840</span>, <span class="hljs-number">830</span>, <span class="hljs-number">790</span>])]<br></code></pre></td></tr></table></figure>
+
+<h2 id="热力图"><a href="#热力图" class="headerlink" title="热力图"></a>热力图</h2><p>热力图的add_yaxis方法就不支持item的形式添加数据，并且还多了一个yaxis_data参数，该参数表示y坐标的标签，而value值是一个包含三个数据的列表，前两个数据表示该值的xy坐标，第三个数据才是y值。  </p>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/OMf1Fe"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/05/07/OMf1Fe.png" alt="OMf1Fe.png" class="lazyload"></a><br>输入类型</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs csharp">yaxis_data = [<span class="hljs-string">&#x27;春&#x27;</span>, <span class="hljs-string">&#x27;夏&#x27;</span>, <span class="hljs-string">&#x27;秋&#x27;</span>,<span class="hljs-string">&#x27;冬&#x27;</span>]<br><span class="hljs-keyword">value</span> = [[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">28</span>],<br>        [<span class="hljs-meta">0, 1, 25</span>],<br>        [<span class="hljs-meta">0, 2, 25</span>],<br>        [<span class="hljs-meta">0, 3, 38</span>],<br>        [<span class="hljs-meta">1, 0, 3</span>],<br>        [<span class="hljs-meta">1, 1, 6</span>],<br>        [<span class="hljs-meta">1, 2, 21</span>],<br>        [<span class="hljs-meta">1, 3, 27</span>],<br>        [<span class="hljs-meta">2, 0, 48</span>],<br>        [<span class="hljs-meta">2, 1, 20</span>],<br>        [<span class="hljs-meta">2, 2, 30</span>],<br>        [<span class="hljs-meta">2, 3, 15</span>]]<br>```  <br><span class="hljs-meta"># 键值对类图形</span><br><span class="hljs-meta">## 饼图</span><br>[<span class="hljs-meta">![xytuGD.png</span>](https:<span class="hljs-comment">//s1.ax1x.com/2022/10/20/xytuGD.png)](https://imgse.com/i/xytuGD)</span><br>输入类型一<br></code></pre></td></tr></table></figure>
+<p>data = [[‘可乐’, 39],<br>        [‘雪碧’, 78],<br>        [‘橙汁’, 53],<br>        [‘绿茶’, 59],<br>        [‘奶茶’, 102],<br>        [‘百威’, 126],<br>        [‘青岛’, 31]]</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs css">输入类型二(该输入会导致<span class="hljs-selector-tag">Legend</span>不显示)<br></code></pre></td></tr></table></figure>
+<p>data = [opts.PieItem(“可乐”,value=39),<br>        opts.PieItem(“雪碧”,value=78),<br>        opts.PieItem(“橙汁”,value=53),<br>        opts.PieItem(“绿茶”,value=59),<br>        opts.PieItem(“奶茶”,value=102),<br>        opts.PieItem(“百威”,value=126),<br>        opts.PieItem(“青岛”,value=31)]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## 漏斗图</span><br>[![xytnPO.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xytnPO.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xytnPO)<br><br></code></pre></td></tr></table></figure>
+<p>data = [[‘草莓’, 85],<br> [‘芒果’, 52],<br> [‘葡萄’, 56],<br> [‘雪梨’, 92],<br> [‘西瓜’, 72],<br> [‘柠檬’, 110],<br> [‘车厘子’, 23]]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## 仪表盘</span><br>[![xytKRe.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xytKRe.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xytKRe)<br></code></pre></td></tr></table></figure>
+<p>data = [[“完成率”, 55.5]]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## 词云</span><br>[![xytLWD.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xytLWD.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xytLWD)<br></code></pre></td></tr></table></figure>
+<p>data = [(“生活资源”, “999”),<br>    (“供热管理”, “888”),<br>    (“供气质量”, “777”),<br>    (“生活用水管理”, “688”),<br>    (“一次供水问题”, “588”),<br>    (“交通运输”, “516”),<br>    (“城市交通”, “515”),<br>    (“环境保护”, “483”),<br>    (“房地产管理”, “462”)]</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs clean">## 日历图<br></code></pre></td></tr></table></figure>
+<p>import datetime<br>begin = datetime.date(2017, 1, 1)<br>end = datetime.date(2017, 12, 31)<br>data = [<br>        [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]<br>        for i in range((end - begin).days + 1)<br>]<br>/**输出结果<br> *[[‘2017-01-01’, 11163],<br> *[‘2017-01-02’, 1527],<br> *[‘2017-01-03’, 20727],<br> *[‘2017-01-04’, 20768],<br> *[‘2017-01-05’, 4260],<br> *[‘2017-01-06’, 1655]]<br> */</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment"># 树型结构类型图</span><br><span class="hljs-comment">## 树图</span><br>[![xydZOH.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xydZOH.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xydZOH)<br>输入类型一<br></code></pre></td></tr></table></figure>
+<p>data = [<br>    {<br>        “children”: [<br>            {“name”: “B”},<br>            {<br>                “children”: [{“children”: [{“name”: “I”}], “name”: “E”}, {“name”: “F”}],<br>                “name”: “C”,<br>            },<br>            {<br>                “children”: [<br>                    {“children”: [{“name”: “J”}, {“name”: “K”}], “name”: “G”},<br>                    {“name”: “H”},<br>                ],<br>                “name”: “D”,<br>            },<br>        ],<br>        “name”: “A”,<br>    }<br>]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk">输入类型二<br>[![xydmmd.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xydmmd.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xydmmd)<br></code></pre></td></tr></table></figure>
+<p>data = [TreeItem(name=”A”,<br>                     children=[TreeItem(name=”B”),<br>                               TreeItem(name=”C”),<br>                               TreeItem(name=”D”,<br>                                       children=[TreeItem(name=”E”),<br>                                                 TreeItem(name=”F”)<br>                                                ]<br>                                       )<br>                              ]<br>                    )<br>           ]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## 桑基图</span><br>[![xyB3p6.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xyB3p6.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xyB3p6)<br></code></pre></td></tr></table></figure>
+<p>nodes = [<br>    {“name”: “category1”},<br>    {“name”: “category2”},<br>    {“name”: “category3”},<br>    {“name”: “category4”},<br>    {“name”: “category5”},<br>    {“name”: “category6”},<br>]</p>
+<p>links = [<br>    {“source”: “category1”, “target”: “category2”, “value”: 10},<br>    {“source”: “category2”, “target”: “category3”, “value”: 15},<br>    {“source”: “category3”, “target”: “category4”, “value”: 20},<br>    {“source”: “category5”, “target”: “category6”, “value”: 25},<br>]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">## 关系图</span><br>[![xyBG6O.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xyBG6O.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xyBG6O)<br>输入方式一<br></code></pre></td></tr></table></figure>
+<p>nodes = [<br>    {“name”: “结点1”, “symbolSize”: 10},<br>    {“name”: “结点2”, “symbolSize”: 20},<br>    {“name”: “结点3”, “symbolSize”: 30},<br>    {“name”: “结点4”, “symbolSize”: 40},<br>    {“name”: “结点5”, “symbolSize”: 50},<br>    {“name”: “结点6”, “symbolSize”: 40},<br>    {“name”: “结点7”, “symbolSize”: 30},<br>    {“name”: “结点8”, “symbolSize”: 20},<br>]<br>links = [{‘source’: ‘结点1’, ‘target’: ‘结点1’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点2’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点3’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点4’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点5’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点6’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点7’},<br> {‘source’: ‘结点1’, ‘target’: ‘结点8’},<br> {‘source’: ‘结点2’, ‘target’: ‘结点1’},<br> {‘source’: ‘结点2’, ‘target’: ‘结点2’},<br> {‘source’: ‘结点2’, ‘target’: ‘结点3’}<br> ]</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">输入方式二<br>[![xyBlfx.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xyBlfx.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xyBlfx)<br>[![xyB81K.png](https:<span class="hljs-regexp">//</span>s1.ax1x.com<span class="hljs-regexp">/2022/</span><span class="hljs-number">10</span><span class="hljs-regexp">/20/</span>xyB81K.png)](https:<span class="hljs-regexp">//img</span>se.com<span class="hljs-regexp">/i/</span>xyB81K)<br></code></pre></td></tr></table></figure>
+<p>nodes = [GraphNode(name=”结点1”),<br>         GraphNode(name=”结点2”),<br>         GraphNode(name=”结点3”),<br>         GraphNode(name=”结点4”)<br>        ]<br>links = [GraphLink(source=”结点1”,target=”结点2”),<br>         GraphLink(source=”结点1”,target=”结点3”),<br>         GraphLink(source=”结点1”,target=”结点4”),<br>         GraphLink(source=”结点2”,target=”结点3”),<br>        ]</p>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vala"><span class="hljs-meta"># 地图</span><br><span class="hljs-meta">## 地图</span><br>输入方式一<br></code></pre></td></tr></table></figure>
+<p>data = [[‘广东’, 27],<br> [‘北京’, 89],<br> [‘上海’, 150],<br> [‘江西’, 146],<br> [‘湖南’, 60],<br> [‘浙江’, 61],<br> [‘江苏’, 132]]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">输入方式二<br></code></pre></td></tr></table></figure>
+<p>data = [MapItem(name=”广东”,value=27),<br>           MapItem(name=”北京”,value=89),<br>           MapItem(name=”上海”,value=150),<br>           MapItem(name=”江西”,value=146),<br>           MapItem(name=”湖南”,value=60),<br>           MapItem(name=”浙江”,value=61)<br>          ]<br>```</p>
+
+  </article>
+
+  
+    
+  <div class="nexmoe-post-copyright">
+    <strong>本文作者：</strong>林肥皂<br>
+    <strong>本文链接：</strong><a href="https://838819583.github.io/2022/05/07/Pyechars%E5%90%84%E5%9B%BE%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F/" title="https:&#x2F;&#x2F;838819583.github.io&#x2F;2022&#x2F;05&#x2F;07&#x2F;Pyechars%E5%90%84%E5%9B%BE%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;838819583.github.io&#x2F;2022&#x2F;05&#x2F;07&#x2F;Pyechars%E5%90%84%E5%9B%BE%E8%BE%93%E5%85%A5%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F&#x2F;</a><br>
+    
+      <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+    
+  </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/pyecharts/" rel="tag">pyecharts</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/python/" rel="tag">python</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag">可视化</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.5.0/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '68366cc70a9833c51a97',
+        clientSecret: '4043816fe5bed0fd7abdd41d0b72f7904cdb7fc9 ',
+        id: window.location.pathname,
+        repo: '838819583.github.io',
+        owner: '838819583',
+        admin: '838819583'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+  </div>
+</div>
+        <div class="nexmoe-post-right">
+          <div class="nexmoe-fixed">
+            <div class="nexmoe-tool"> 
+              
+                
+                  
+                  
+                  
+                    <button class="mdui-fab catalog mdui-ripple" style="overflow:unset;">
+                      <i class="nexmoefont icon-i-catalog"></i>
+                      <div class="nexmoe-toc">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E7%B1%BB%E5%9B%BE%E5%BD%A2"><span class="toc-number">1.</span> <span class="toc-text">直角坐标系类图形</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%B1%E7%8A%B6-%E6%9D%A1%E5%BD%A2%E5%9B%BE%E3%80%81%E6%B6%9F%E6%BC%AA%E7%89%B9%E6%95%88%E6%95%A3%E7%82%B9%E5%9B%BE%E3%80%81%E6%8A%98%E7%BA%BF-%E9%9D%A2%E7%A7%AF%E5%9B%BE%E3%80%81%E8%B1%A1%E5%BD%A2%E6%9F%B1%E7%8A%B6%E5%9B%BE%E3%80%81%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">柱状\条形图、涟漪特效散点图、折线\面积图、象形柱状图、散点图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%B1%E5%9E%8B%E5%9B%BE"><span class="toc-number">1.2.</span> <span class="toc-text">箱型图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E5%8A%9B%E5%9B%BE"><span class="toc-number">1.3.</span> <span class="toc-text">热力图</span></a></li></ol></li></ol>
+                      </div>
+                    </button>
+                  
+                    
+                
+              
+              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ 
+
+<script async src="/js/app.js?v=1666237180917"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>
