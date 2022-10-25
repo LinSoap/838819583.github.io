@@ -33,9 +33,9 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://z3.ax1x.com/2021/06/09/26fRCq.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1666668203308">
+  <link rel="stylesheet" href="/css/style.css?v=1666669560890">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666668203308">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666669560890">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -72,7 +72,14 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博客
@@ -162,20 +169,20 @@
 </li>
 </ol>
 <hr>
-<h2 id="搭建三台能够相互通信的主机"><a href="#搭建三台能够相互通信的主机" class="headerlink" title="搭建三台能够相互通信的主机"></a>搭建三台能够相互通信的主机</h2><h3 id="静态ip配置"><a href="#静态ip配置" class="headerlink" title="静态ip配置"></a>静态ip配置</h3><p>一般情况下，CentOS默认的IP获取方式是DHCP，但是对于集群来说，DHCP动态获取IP可能会导致集群间的通信不稳定，所以我们要设置静态IP。<br>我们把虚拟机的网络连接模式更改为“桥接模式”，并获取宿主机的IP，三台虚拟机的IP要和宿主机处在同一网段下。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26fRCq"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26fRCq.png" alt="26fRCq.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26fg5n"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26fg5n.png" alt="26fg5n.png" class="lazyload"></a><br>更改连接模式和获取IP后，开始对CentOS进行静态IP的配置，具体配置文件在/etc/sysconfig/network-scripts/ifcfg-ens33 文件中，使用vim打开文件，完成如下配置：<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/264XnO"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/264XnO.png" alt="264XnO.png" class="lazyload"></a><br>注意：配置的IP要和宿主机处在同一网段下，网关和宿主机相同。<br>保存后输入systemctl restart network指令刷新网络设置，刷新后使用ifconfig查看IP是否已经更改。并尝试相互ping三台主机。</p>
+<h2 id="搭建三台能够相互通信的主机"><a href="#搭建三台能够相互通信的主机" class="headerlink" title="搭建三台能够相互通信的主机"></a>搭建三台能够相互通信的主机</h2><h3 id="静态ip配置"><a href="#静态ip配置" class="headerlink" title="静态ip配置"></a>静态ip配置</h3><p>一般情况下，CentOS默认的IP获取方式是DHCP，但是对于集群来说，DHCP动态获取IP可能会导致集群间的通信不稳定，所以我们要设置静态IP。<br>我们把虚拟机的网络连接模式更改为“桥接模式”，并获取宿主机的IP，三台虚拟机的IP要和宿主机处在同一网段下。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26fRCq"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26fRCq.png" alt="26fRCq.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26fg5n"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26fg5n.png" alt="26fg5n.png" class="lazyload"></a><br>更改连接模式和获取IP后，开始对CentOS进行静态IP的配置，具体配置文件在&#x2F;etc&#x2F;sysconfig&#x2F;network-scripts&#x2F;ifcfg-ens33 文件中，使用vim打开文件，完成如下配置：<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/264XnO"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/264XnO.png" alt="264XnO.png" class="lazyload"></a><br>注意：配置的IP要和宿主机处在同一网段下，网关和宿主机相同。<br>保存后输入systemctl restart network指令刷新网络设置，刷新后使用ifconfig查看IP是否已经更改。并尝试相互ping三台主机。</p>
 <h3 id="Hosts映射配置"><a href="#Hosts映射配置" class="headerlink" title="Hosts映射配置"></a>Hosts映射配置</h3><p>三台主机HostName和IP规划  </p>
 <ol>
 <li>Master 172.16.1.121 </li>
 <li>Slave1 172.16.1.122</li>
-<li>Slave2 172.16.1.123 </li>
+<li>Slave2 172.16.1.123</li>
 </ol>
-<p>该步骤主要修改2个文件，/etc/hostname和/etc/hosts文件，其中hostname文件要根据主机的规划而有所不同，hosts文件三台主机一致即可。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26HqgA"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26HqgA.png" alt="26HqgA.png" class="lazyload"></a><br>完成hostname和hosts配置后，尝试使用hostname相互ping三台主机。</p>
+<p>该步骤主要修改2个文件，&#x2F;etc&#x2F;hostname和&#x2F;etc&#x2F;hosts文件，其中hostname文件要根据主机的规划而有所不同，hosts文件三台主机一致即可。<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/26HqgA"><img data-fancybox="gallery" data-sizes="auto" data-src="https://z3.ax1x.com/2021/06/09/26HqgA.png" alt="26HqgA.png" class="lazyload"></a><br>完成hostname和hosts配置后，尝试使用hostname相互ping三台主机。</p>
 <h3 id="SSH免密登录配置"><a href="#SSH免密登录配置" class="headerlink" title="SSH免密登录配置"></a>SSH免密登录配置</h3><p>在Hadoop集群启动时会要求多次输入密码，非常麻烦，这时候就需要配置SSH免密登录了。<br>在Master节点上输入该指令生成公钥</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa (直接多次回车就行)<br>cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys<br>chmod 600 ~/.ssh/authorized_keys<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa (直接多次回车就行)<br><span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys<br><span class="hljs-built_in">chmod</span> 600 ~/.ssh/authorized_keys<br></code></pre></td></tr></table></figure>
 <p>将Master的公钥，通过scp指令发送到Slave1和Slave2的.ssh文件夹，即可完成Master免密登录Slave1和Slave2.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">scp ~/.ssh/id_rsa.pub hadoop@slave01:/home/hadoop/<br>scp ~/.ssh/id_rsa.pub hadoop@slave02:/home/hadoop/<br></code></pre></td></tr></table></figure>
 <p>再使用cat指令追加到authorized_keys下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">cat ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys<br>rm ~/id_rsa.pub<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cat</span> ~/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys<br><span class="hljs-built_in">rm</span> ~/id_rsa.pub<br></code></pre></td></tr></table></figure>
 <p>完成以上操作后，尝试在Master节点，SSH登录到Slave1和Slave2，能够直接登录就说明SSH免密登录配置完成。</p>
 <h2 id="在三台主机上安装Hadoop并完成相关配置"><a href="#在三台主机上安装Hadoop并完成相关配置" class="headerlink" title="在三台主机上安装Hadoop并完成相关配置"></a>在三台主机上安装Hadoop并完成相关配置</h2><h3 id="JDK安装"><a href="#JDK安装" class="headerlink" title="JDK安装"></a>JDK安装</h3><p>Hadoop是由Java语言编写，JDK是Java语言的软件开发工具包，想要运行Hadoop，必须得先安装JDK。下载对应的解压包，使用以下指令解压到指定目录</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf 解压包 -C 指定目录<br>例: <br>tar -zxf jdk-8u291-linux-i586.tar.gz -C /home/hadoop/module/<br></code></pre></td></tr></table></figure>
@@ -185,11 +192,11 @@
 <h3 id="Hadoop安装并修改配置文件"><a href="#Hadoop安装并修改配置文件" class="headerlink" title="Hadoop安装并修改配置文件"></a>Hadoop安装并修改配置文件</h3><p>安装Hadoop只需要下载解压包，使用以下指令解压到指定目录即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf 解压包 -C 指定目录<br>例: <br>tar -zxf hadoop-2.7.0.tar.gz -C /home/hadoop/module/<br></code></pre></td></tr></table></figure>
 
-<p>成功解压Hadoop后，添加Hadoop环境变量，在~/.bashrc添加以下内容     </p>
+<p>成功解压Hadoop后，添加Hadoop环境变量，在~&#x2F;.bashrc添加以下内容     </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> HADOOP_HOME=/home/hadoop/module/hadoop-2.7.0(Hadoop解压位置)<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/sbin:<span class="hljs-variable">$HADOOP_HOME</span>/bin<br></code></pre></td></tr></table></figure>
 
 
-<p>集群需要修改的配置文件比伪分布式要多，只少修改5个配置文件，分别为Slave，core-site.xml，hdfs-site.xml，mapred-site.xml（需要重命名），yarn-site.xml，具体配置文件存放在hadoop目录下的etc/hadoop中。</p>
+<p>集群需要修改的配置文件比伪分布式要多，只少修改5个配置文件，分别为Slave，core-site.xml，hdfs-site.xml，mapred-site.xml（需要重命名），yarn-site.xml，具体配置文件存放在hadoop目录下的etc&#x2F;hadoop中。</p>
 <p>一、Slave（输入DataNode的域名)     </p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">Slave1</span><br>Slave2<br></code></pre></td></tr></table></figure>
 <p>二、core-site.xml    </p>
@@ -224,7 +231,7 @@
 <li>Slave2  <ul>
 <li>jps  </li>
 <li>DataNode  </li>
-<li>NodeManager  </li>
+<li>NodeManager</li>
 </ul>
 </li>
 </ol>
@@ -303,7 +310,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" src="http
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1666668203315"></script>
+<script async src="/js/app.js?v=1666669560901"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

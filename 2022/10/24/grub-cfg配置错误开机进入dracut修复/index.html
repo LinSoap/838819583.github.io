@@ -31,9 +31,9 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2022/10/24/x2YCEn.jpg">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1666668203244">
+  <link rel="stylesheet" href="/css/style.css?v=1666669560834">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666668203244">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666669560834">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -70,7 +70,14 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博客
@@ -137,7 +144,7 @@
     
     <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年10月24日</a>
-    <a><i class="nexmoefont icon-areachart"></i>543 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>566 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 2 分钟</a>
 </div>
 
@@ -145,15 +152,15 @@
 
     <p>记录一次作死后更改grub.cfg抢救经历</p>
 <span id="more"></span>
-<p>前几天打算使用学校服务器虚拟化一台windows玩玩，但是发现kvm虚拟出的windows显卡性能很低并且无法安装驱动，所以尝试使用显卡直通，网络上搜索了教程，其中有一步是修改/etc/default/grub，我没有注意误将rd.lvm.lv配置修改并执行了<br> grub2-mkconfig -o /boot/efi/EFI/centos/grub.cfg<br> 重启后直接进入dracut模式并提示<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2YCEn"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2YCEn.jpg" alt="x2YCEn.jpg" class="lazyload"></a><br>系统提示/dev/mapper/centos00-root dose not exist，其中/dev/mapper路径下放置了VG(volume group)和PV(physcial volume)的映射关系，由于我修改了grub.cfg导致开机时映射关系丢失。  </p>
-<p>这是我原磁盘分区方式<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2YSBj"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2YSBj.jpg" alt="x2YSBj.jpg" class="lazyload"></a><br>其中我做了双系统，主要是系统为centos00，为lvm分区格式，在/dev目录下只有centos/root，并没有centos00/root，原因是未激活该逻辑卷。所以要先激活该逻辑卷。</p>
+<p>前几天打算使用学校服务器虚拟化一台windows玩玩，但是发现kvm虚拟出的windows显卡性能很低并且无法安装驱动，所以尝试使用显卡直通，网络上搜索了教程，其中有一步是修改&#x2F;etc&#x2F;default&#x2F;grub，我没有注意误将rd.lvm.lv配置修改并执行了<br> grub2-mkconfig -o &#x2F;boot&#x2F;efi&#x2F;EFI&#x2F;centos&#x2F;grub.cfg<br> 重启后直接进入dracut模式并提示<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2YCEn"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2YCEn.jpg" alt="x2YCEn.jpg" class="lazyload"></a><br>系统提示&#x2F;dev&#x2F;mapper&#x2F;centos00-root dose not exist，其中&#x2F;dev&#x2F;mapper路径下放置了VG(volume group)和PV(physcial volume)的映射关系，由于我修改了grub.cfg导致开机时映射关系丢失。  </p>
+<p>这是我原磁盘分区方式<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2YSBj"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2YSBj.jpg" alt="x2YSBj.jpg" class="lazyload"></a><br>其中我做了双系统，主要是系统为centos00，为lvm分区格式，在&#x2F;dev目录下只有centos&#x2F;root，并没有centos00&#x2F;root，原因是未激活该逻辑卷。所以要先激活该逻辑卷。</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#由于dracut并没有需要使用到的vgsan和vgchange指令，所以先挂载centos</span><br>  <br>mkdir /tmp1<br>mount <span class="hljs-regexp">/dev/</span>centos<span class="hljs-regexp">/root /</span>tmp1<br><br><span class="hljs-comment"># vgscan 扫描逻辑盘</span><br>vgscan<br><br><span class="hljs-comment">#Reading all physical volumes.  This may take a while...</span><br><span class="hljs-comment">#Found volume group &quot;centos00&quot; using metadata type lvm2</span><br><span class="hljs-comment">#Found volume group &quot;centos&quot; using metadata type lvm2</span><br><br><span class="hljs-comment">#激活centos00逻辑卷</span><br>vgchange -a y centos00<br><br><span class="hljs-comment">#挂载centos00</span><br>mkdir /mnt<br>mount <span class="hljs-regexp">/dev/</span>centos00<span class="hljs-regexp">/root /m</span>nt<br><span class="hljs-comment">#挂载/boot</span><br>mount <span class="hljs-regexp">/dev/</span>sdb2 <span class="hljs-regexp">/mnt/</span>boot<br><span class="hljs-comment">#挂载/boot/efi</span><br>mount <span class="hljs-regexp">/dev/</span>sdb1 <span class="hljs-regexp">/mnt/</span>boot/efi<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-regexp">/dev /</span>proc <span class="hljs-regexp">/sys;do mount -B $i /m</span>nt<span class="hljs-variable">$i</span>;done<br></code></pre></td></tr></table></figure>
-<p>至此已经可以访问到原系统的内容了，只需要进入系统修改/etc/default/grub重新执行grub2-mkconfig即可</p>
+<p>至此已经可以访问到原系统的内容了，只需要进入系统修改&#x2F;etc&#x2F;default&#x2F;grub重新执行grub2-mkconfig即可</p>
 <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-comment">#使用chroot改变系统路径进入</span><br>chroot /mnt<br><span class="hljs-comment">#修改grub文件</span><br>vim <span class="hljs-regexp">/etc/</span>default/grub<br><span class="hljs-comment">#重新执行grub2-mkconfig</span><br>grub2-mkconfig -o <span class="hljs-regexp">/boot/</span>efi<span class="hljs-regexp">/EFI/</span>centos/grub.cfg<br></code></pre></td></tr></table></figure>
 <p>重启检验是否能正常开机  </p>
-<p>容易出现的错误：<br>一. basename: command not found<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2ayYn"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2ayYn.jpg" alt="x2ayYn.jpg" class="lazyload"></a><br>原因:未使用chroot进入/mnt，使得grub2-mkconfig脚本无法正确获取到需要使用的脚本。<br>解决：只需chroot /mnt再执行命令即可</p>
-<p>二. failed to get canomical path of ‘rootfs’<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2a6Wq"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2a6Wq.jpg" alt="x2a6Wq.jpg" class="lazyload"></a><br>原因:未挂载/sys/fs，导致脚本无法获取到根系统。<br>解决：将所有脚本可能使用的目录挂载上</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-regexp">/dev /</span>proc <span class="hljs-regexp">/sys;do mount -B $i /m</span>nt<span class="hljs-variable">$i</span>;done<br></code></pre></td></tr></table></figure>
+<p>容易出现的错误：<br>一. basename: command not found<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2ayYn"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2ayYn.jpg" alt="x2ayYn.jpg" class="lazyload"></a><br>原因:未使用chroot进入&#x2F;mnt，使得grub2-mkconfig脚本无法正确获取到需要使用的脚本。<br>解决：只需chroot &#x2F;mnt再执行命令即可</p>
+<p>二. failed to get canomical path of ‘rootfs’<br><a target="_blank" rel="noopener" href="https://imgse.com/i/x2a6Wq"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/10/24/x2a6Wq.jpg" alt="x2a6Wq.jpg" class="lazyload"></a><br>原因:未挂载&#x2F;sys&#x2F;fs，导致脚本无法获取到根系统。<br>解决：将所有脚本可能使用的目录挂载上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> /dev /proc /sys;<span class="hljs-keyword">do</span> mount -B <span class="hljs-variable">$i</span> /mnt<span class="hljs-variable">$i</span>;<span class="hljs-keyword">done</span><br></code></pre></td></tr></table></figure>
   </article>
 
   
@@ -220,7 +227,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" src="http
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1666668203250"></script>
+<script async src="/js/app.js?v=1666669560839"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

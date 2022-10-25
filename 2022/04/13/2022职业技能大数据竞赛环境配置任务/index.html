@@ -32,16 +32,16 @@
 <meta property="article:modified_time" content="2022-09-21T12:02:59.929Z">
 <meta property="article:author" content="林肥皂">
 <meta property="article:tag" content="大数据">
+<meta property="article:tag" content="flink">
 <meta property="article:tag" content="2022职业技能大数据竞赛">
 <meta property="article:tag" content="hadoop">
 <meta property="article:tag" content="spark">
-<meta property="article:tag" content="flink">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2022/04/13/LMIp5t.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1666668203296">
+  <link rel="stylesheet" href="/css/style.css?v=1666669560878">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666668203296">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666669560878">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -78,7 +78,14 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博客
@@ -145,7 +152,7 @@
     
     <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月13日</a>
-    <a><i class="nexmoefont icon-areachart"></i>1.3k 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.4k 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 6 分钟</a>
 </div>
 
@@ -155,18 +162,20 @@
 <span id="more"></span>
 <h1 id="任务1：Hadoop完全分布式安装配置"><a href="#任务1：Hadoop完全分布式安装配置" class="headerlink" title="任务1：Hadoop完全分布式安装配置"></a>任务1：Hadoop完全分布式安装配置</h1><h2 id="任务要求"><a href="#任务要求" class="headerlink" title="任务要求"></a>任务要求</h2><p>本环节需要使用root用户完成相关配置，安装Hadoop需要配置前置环境。命令中要求使用绝对路径，具体要求如下:</p>
 <ol>
-<li>将Master节点JDK安装包解压并移动到/usr/local/src/路径(若路径不存在，则需新建)，将命令复制并粘贴至对应报告中;</li>
-<li>修改/root/profile文件，设置JDK环境变量，配置完毕后在Master节点分别执行“java”和“javac”命令，将命令行执行结果分别截图并粘贴至对应报告中;</li>
+<li>将Master节点JDK安装包解压并移动到&#x2F;usr&#x2F;local&#x2F;src&#x2F;路径(若路径不存在，则需新建)，将命令复制并粘贴至对应报告中;</li>
+<li>修改&#x2F;root&#x2F;profile文件，设置JDK环境变量，配置完毕后在Master节点分别执行“java”和“javac”命令，将命令行执行结果分别截图并粘贴至对应报告中;</li>
 <li>请完成host相关配置，将三个节点分别命名为master、slave1、slave2，并做免密登录，使用绝对路径从master复制JDK解压后的安装文件到slave1、slave2节点，并配置相关环境变量，将全部复制命令复制并粘贴至对应报告中;</li>
-<li>在Master将Hadoop解压到/opt目录下，并将解压包分发至slave1.slave2中,配置好相关环境，初始化Hadoop环境namenode，将初始化命令及初始化结果复制粘贴至对应报告中；</li>
-<li>启动hadoop集群，查看master节点jps进程，将查看结果复制粘贴至对应报告中<h3 id="1-1-解压jdk-tar-gz"><a href="#1-1-解压jdk-tar-gz" class="headerlink" title="1.1 解压jdk.tar.gz"></a>1.1 解压jdk.tar.gz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkdir /usr/<span class="hljs-built_in">local</span>/src/<br>tar -zxf jdk.tar.gz -C /usr/<span class="hljs-built_in">local</span>/src/<br></code></pre></td></tr></table></figure>
-<h3 id="1-2-设置jdk环境变量执行java、javac"><a href="#1-2-设置jdk环境变量执行java、javac" class="headerlink" title="1.2 设置jdk环境变量执行java、javac"></a>1.2 设置jdk环境变量执行java、javac</h3>在etc/profile中追加   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/usr/<span class="hljs-built_in">local</span>/src/jdk  <br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/bin<br></code></pre></td></tr></table></figure>
-最后执行source /etc/profile使之生效<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIp5t"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIp5t.png" alt="LMIp5t.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMISUI"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMISUI.png" alt="LMISUI.png" class="lazyload"></a></li>
+<li>在Master将Hadoop解压到&#x2F;opt目录下，并将解压包分发至slave1.slave2中,配置好相关环境，初始化Hadoop环境namenode，将初始化命令及初始化结果复制粘贴至对应报告中；</li>
+<li>启动hadoop集群，查看master节点jps进程，将查看结果复制粘贴至对应报告中</li>
 </ol>
+<h3 id="1-1-解压jdk-tar-gz"><a href="#1-1-解压jdk-tar-gz" class="headerlink" title="1.1 解压jdk.tar.gz"></a>1.1 解压jdk.tar.gz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /usr/local/src/<br>tar -zxf jdk.tar.gz -C /usr/local/src/<br></code></pre></td></tr></table></figure>
+<h3 id="1-2-设置jdk环境变量执行java、javac"><a href="#1-2-设置jdk环境变量执行java、javac" class="headerlink" title="1.2 设置jdk环境变量执行java、javac"></a>1.2 设置jdk环境变量执行java、javac</h3><p>在etc&#x2F;profile中追加   </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/src/jdk  <br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/bin<br></code></pre></td></tr></table></figure>
+<p>最后执行source &#x2F;etc&#x2F;profile使之生效<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIp5t"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIp5t.png" alt="LMIp5t.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMISUI"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMISUI.png" alt="LMISUI.png" class="lazyload"></a></p>
 <h3 id="1-3-设置hostname，关闭防火墙，完成免密登录"><a href="#1-3-设置hostname，关闭防火墙，完成免密登录" class="headerlink" title="1.3 设置hostname，关闭防火墙，完成免密登录"></a>1.3 设置hostname，关闭防火墙，完成免密登录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#设置hostname</span><br>vim /etc/hostname <br><span class="hljs-comment">#生成ssh公钥</span><br>ssh-keygen -t rsa -P <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-comment">#发放公钥</span><br>ssh-copy-id 用户名@主机名<br><span class="hljs-comment">#关闭防火墙</span><br>systemctl stop firewalld.service<br>systemctl <span class="hljs-built_in">disable</span> firewalld.service<br>systemctl status firewalld.service<br><span class="hljs-comment">#尝试ssh登录</span><br>ssh 主机名<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIP8f"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIP8f.png" alt="LMIP8f.png" class="lazyload"></a></p>
 <h3 id="1-4-解压hadoop-tar-gz，设置环境变量，完成hadoop配置，格式化NameNnode"><a href="#1-4-解压hadoop-tar-gz，设置环境变量，完成hadoop配置，格式化NameNnode" class="headerlink" title="1.4 解压hadoop.tar.gz，设置环境变量，完成hadoop配置，格式化NameNnode"></a>1.4 解压hadoop.tar.gz，设置环境变量，完成hadoop配置，格式化NameNnode</h3><p>环境变量设置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf hadoop.tar.gz -C /opt/<br>mv /opt/hadoop-2.7.7 /opt/hadoop<br>vim /etc/profile<br><span class="hljs-built_in">export</span> HADOOP_CLASSPATH=`/opt/hadoop/bin/hadoop classpath`<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop/<br><span class="hljs-built_in">export</span> HADOOP_HOME=/opt/hadoop/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/bin:<span class="hljs-variable">$HADOOP_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf hadoop.tar.gz -C /opt/<br><span class="hljs-built_in">mv</span> /opt/hadoop-2.7.7 /opt/hadoop<br>vim /etc/profile<br><span class="hljs-built_in">export</span> HADOOP_CLASSPATH=`/opt/hadoop/bin/hadoop classpath`<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop/<br><span class="hljs-built_in">export</span> HADOOP_HOME=/opt/hadoop/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/bin:<span class="hljs-variable">$HADOOP_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <p>core-site.xml</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>fs.defaultFS<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>hdfs://master:9000<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>hadoop.tmp.dir<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>/opt/hadoop/tmp<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>hdfs-site.xml</p>
@@ -221,27 +230,27 @@
 </tbody></table>
 <h1 id="任务2-Spark-on-Yarn安装配置"><a href="#任务2-Spark-on-Yarn安装配置" class="headerlink" title="任务2 Spark on Yarn安装配置"></a>任务2 Spark on Yarn安装配置</h1><h2 id="任务要求-1"><a href="#任务要求-1" class="headerlink" title="任务要求"></a>任务要求</h2><p>本环节需要使用root用户完成相关配置，已安装Hadoop及需要配置前置环境，具体要求如下：</p>
 <ol>
-<li>将scala包解压到/usr/路径，配置环境变量使其生效，将完整命令复制粘贴至对应报告中（若已安装，则可跳过）；</li>
-<li>配置/etc/profile文件，设置Spark环境变量，并使环境变量生效将环境变量配置内容复制粘贴至对应报告中;</li>
-<li>完成on yarn相关配置 使用spark on yarn的模式提交$SPARK_HOME/examples/jars/spark-examples_2.11-2.1.1.jar,运行的主类为org.apache.spark.examples.SparkPi,将运行结果粘贴至对应报告中。</li>
+<li>将scala包解压到&#x2F;usr&#x2F;路径，配置环境变量使其生效，将完整命令复制粘贴至对应报告中（若已安装，则可跳过）；</li>
+<li>配置&#x2F;etc&#x2F;profile文件，设置Spark环境变量，并使环境变量生效将环境变量配置内容复制粘贴至对应报告中;</li>
+<li>完成on yarn相关配置 使用spark on yarn的模式提交$SPARK_HOME&#x2F;examples&#x2F;jars&#x2F;spark-examples_2.11-2.1.1.jar,运行的主类为org.apache.spark.examples.SparkPi,将运行结果粘贴至对应报告中。</li>
 </ol>
-<h3 id="2-1-解压scala-tar-gz，配置环境变量"><a href="#2-1-解压scala-tar-gz，配置环境变量" class="headerlink" title="2.1 解压scala.tar.gz，配置环境变量"></a>2.1 解压scala.tar.gz，配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf scala.tar.gz -C /usr/<br>mv /usr/scala-2.1.1 /usr/scala<br>vim /etc/profile<br><span class="hljs-built_in">export</span> SCALA_HOME=/usr/scala/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SCALA_HOME</span>/bin<br><span class="hljs-built_in">source</span> /etc/profile<br>scala<br></code></pre></td></tr></table></figure>
+<h3 id="2-1-解压scala-tar-gz，配置环境变量"><a href="#2-1-解压scala-tar-gz，配置环境变量" class="headerlink" title="2.1 解压scala.tar.gz，配置环境变量"></a>2.1 解压scala.tar.gz，配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf scala.tar.gz -C /usr/<br><span class="hljs-built_in">mv</span> /usr/scala-2.1.1 /usr/scala<br>vim /etc/profile<br><span class="hljs-built_in">export</span> SCALA_HOME=/usr/scala/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SCALA_HOME</span>/bin<br><span class="hljs-built_in">source</span> /etc/profile<br>scala<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIAKg"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIAKg.png" alt="LMIAKg.png" class="lazyload"></a></p>
-<h3 id="2-2-解压spark-tar-gz，配置环境变量"><a href="#2-2-解压spark-tar-gz，配置环境变量" class="headerlink" title="2.2 解压spark.tar.gz，配置环境变量"></a>2.2 解压spark.tar.gz，配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf spark.tar.gz -C /usr/<br>mv /usr/spark-2.1.1 /usr/scala<br>vim /etc/profile<br><span class="hljs-built_in">export</span> SPARK_HOME=/opt/spark<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin:<span class="hljs-variable">$SPARK_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<h3 id="2-2-解压spark-tar-gz，配置环境变量"><a href="#2-2-解压spark-tar-gz，配置环境变量" class="headerlink" title="2.2 解压spark.tar.gz，配置环境变量"></a>2.2 解压spark.tar.gz，配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf spark.tar.gz -C /usr/<br><span class="hljs-built_in">mv</span> /usr/spark-2.1.1 /usr/scala<br>vim /etc/profile<br><span class="hljs-built_in">export</span> SPARK_HOME=/opt/spark<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin:<span class="hljs-variable">$SPARK_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <h3 id="2-3-提交sparkPi"><a href="#2-3-提交sparkPi" class="headerlink" title="2.3 提交sparkPi"></a>2.3 提交sparkPi</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">spark-submit --master yarn --class org.apache.spark.examples.SparkPi /opt/spark/examples/jars/spark-examples_2.11-2.1.1.jar<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIErQ"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIErQ.png" alt="LMIErQ.png" class="lazyload"></a></p>
 <h1 id="任务3-Flink-on-Yarn安装配置"><a href="#任务3-Flink-on-Yarn安装配置" class="headerlink" title="任务3 Flink on Yarn安装配置"></a>任务3 Flink on Yarn安装配置</h1><h2 id="任务要求-2"><a href="#任务要求-2" class="headerlink" title="任务要求"></a>任务要求</h2><p>本环节需要使用root用户完成相关配置，已安装Hadoop及需要配置前置环境，具体要求如下：</p>
 <ol>
-<li>将Flink包解压到路径/opt目录下，将完整命令复制粘贴至对应报告中;</li>
-<li>修改/etc/profile文件，设置Flink环境变量，并使环境变量生效将环境变量配置内容复制粘贴至对应报告中;</li>
-<li>开启Hadoop集群，在yarn上以per job模式（即Job分离模式，不采用Session模式）运行/examples/batch/WordCount.jar，将运行结果最后10行复制粘贴至对应报告中。示例：flink run -m yarn-cluster -p 2 -yjm 2G -ytm 2G /examples/batch/WordCount.jar</li>
+<li>将Flink包解压到路径&#x2F;opt目录下，将完整命令复制粘贴至对应报告中;</li>
+<li>修改&#x2F;etc&#x2F;profile文件，设置Flink环境变量，并使环境变量生效将环境变量配置内容复制粘贴至对应报告中;</li>
+<li>开启Hadoop集群，在yarn上以per job模式（即Job分离模式，不采用Session模式）运行&#x2F;examples&#x2F;batch&#x2F;WordCount.jar，将运行结果最后10行复制粘贴至对应报告中。示例：flink run -m yarn-cluster -p 2 -yjm 2G -ytm 2G &#x2F;examples&#x2F;batch&#x2F;WordCount.jar</li>
 </ol>
-<h3 id="3-1-解压Flink-tar-gz"><a href="#3-1-解压Flink-tar-gz" class="headerlink" title="3.1 解压Flink.tar.gz"></a>3.1 解压Flink.tar.gz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf flink.tar.gz -C /opt/<br>mv /opt/flink-1.10.2 /opt/flink<br></code></pre></td></tr></table></figure>
+<h3 id="3-1-解压Flink-tar-gz"><a href="#3-1-解压Flink-tar-gz" class="headerlink" title="3.1 解压Flink.tar.gz"></a>3.1 解压Flink.tar.gz</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf flink.tar.gz -C /opt/<br><span class="hljs-built_in">mv</span> /opt/flink-1.10.2 /opt/flink<br></code></pre></td></tr></table></figure>
 <h3 id="3-2-配置环境变量"><a href="#3-2-配置环境变量" class="headerlink" title="3.2 配置环境变量"></a>3.2 配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/profile<br><span class="hljs-built_in">export</span> FLINK_HOME=/opt/flink<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$FLINK_HOME</span>/bin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <h3 id="3-3-提交WordCount"><a href="#3-3-提交WordCount" class="headerlink" title="3.3 提交WordCount"></a>3.3 提交WordCount</h3><h4 id="3-3-1-yarn-prr-job方式"><a href="#3-3-1-yarn-prr-job方式" class="headerlink" title="3.3.1 yarn prr-job方式"></a>3.3.1 yarn prr-job方式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">flink run -m yarn-cluster -p 2 -yjm 2G -ytm 2G ../examples/batch/WordCount.jar <br></code></pre></td></tr></table></figure>
 <h4 id="3-3-2-yarn-session方式"><a href="#3-3-2-yarn-session方式" class="headerlink" title="3.3.2 yarn session方式"></a>3.3.2 yarn session方式</h4><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">flink</span>-session -d<br><span class="hljs-attribute">flink</span> run -yjm <span class="hljs-number">2</span>G -ytm <span class="hljs-number">2</span>G ../examples/batch/WordCount.jar <br></code></pre></td></tr></table></figure>
 <p>master:8080 yarn web ui<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIi28"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIi28.png" alt="LMIi28.png" class="lazyload"></a></p>
-<p>最终/ect/profile</p>
+<p>最终&#x2F;ect&#x2F;profile</p>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LMIFxS"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/13/LMIFxS.png" alt="LMIFxS.png" class="lazyload"></a></p>
 
   </article>
@@ -317,7 +326,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" src="http
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1666668203302"></script>
+<script async src="/js/app.js?v=1666669560885"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

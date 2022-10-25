@@ -32,9 +32,9 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2022/04/14/LltgXD.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1666668203286">
+  <link rel="stylesheet" href="/css/style.css?v=1666669560873">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666668203286">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666669560873">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -71,7 +71,14 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博客
@@ -138,7 +145,7 @@
     
     <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月14日</a>
-    <a><i class="nexmoefont icon-areachart"></i>277 字</a>
+    <a><i class="nexmoefont icon-areachart"></i>278 字</a>
     <a><i class="nexmoefont icon-time-circle-fill"></i>大概 1 分钟</a>
 </div>
 
@@ -148,13 +155,13 @@
 <span id="more"></span>
 <p>spark HA时，首先确保你的Zookeeper和Hadoop已经安装完成，安装过程查看博客<br><a target="_blank" rel="noopener" href="https://linsoap.icu/2022/01/02/Hadoop%E9%9B%86%E7%BE%A4%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE/">Hadoop集群安装与配置</a><br><a target="_blank" rel="noopener" href="https://linsoap.icu/2022/04/14/Zookeeper%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">Zookeeper安装配置</a>  </p>
 <p>Spark HA的安装配置主要分为三步<br>1、解压tar包，配置环境变量<br>2、配置JAVA_HOME,HADOOP_HOME,HADOOP_CONF_DIR,HADOOP_CLASSPATH<br>3、修改slaves文件,spark.env.sh</p>
-<h3 id="1、解压tar包，配置环境变量"><a href="#1、解压tar包，配置环境变量" class="headerlink" title="1、解压tar包，配置环境变量"></a>1、解压tar包，配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf spark.tar.gz -C  /opt<br>mv /opt/spark-2.1.2 /opt/spark<br>vim /etc/profile<br><span class="hljs-built_in">export</span> SPARK_HOME=/opt/spark<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin:<span class="hljs-variable">$SPARK_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<h3 id="1、解压tar包，配置环境变量"><a href="#1、解压tar包，配置环境变量" class="headerlink" title="1、解压tar包，配置环境变量"></a>1、解压tar包，配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf spark.tar.gz -C  /opt<br><span class="hljs-built_in">mv</span> /opt/spark-2.1.2 /opt/spark<br>vim /etc/profile<br><span class="hljs-built_in">export</span> SPARK_HOME=/opt/spark<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$SPARK_HOME</span>/bin:<span class="hljs-variable">$SPARK_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 
-<h3 id="2、配置JAVA-HOME-HADOOP-HOME-HADOOP-CONF-DIR-HADOOP-CLASSPATH"><a href="#2、配置JAVA-HOME-HADOOP-HOME-HADOOP-CONF-DIR-HADOOP-CLASSPATH" class="headerlink" title="2、配置JAVA_HOME,HADOOP_HOME,HADOOP_CONF_DIR,HADOOP_CLASSPATH"></a>2、配置JAVA_HOME,HADOOP_HOME,HADOOP_CONF_DIR,HADOOP_CLASSPATH</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/profile<br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/<span class="hljs-built_in">local</span>/src/jdk1.8.0_291/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/bin<br><span class="hljs-built_in">export</span> HADOOP_HOME=/opt/hadoop/<br><span class="hljs-built_in">export</span> HADOOP_CLASSPATH=`/opt/hadoop/bin/hadoop classpath`<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/bin:<span class="hljs-variable">$HADOOP_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<h3 id="2、配置JAVA-HOME-HADOOP-HOME-HADOOP-CONF-DIR-HADOOP-CLASSPATH"><a href="#2、配置JAVA-HOME-HADOOP-HOME-HADOOP-CONF-DIR-HADOOP-CLASSPATH" class="headerlink" title="2、配置JAVA_HOME,HADOOP_HOME,HADOOP_CONF_DIR,HADOOP_CLASSPATH"></a>2、配置JAVA_HOME,HADOOP_HOME,HADOOP_CONF_DIR,HADOOP_CLASSPATH</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">vim /etc/profile<br><span class="hljs-built_in">export</span> JAVA_HOME=/usr/local/src/jdk1.8.0_291/<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/bin<br><span class="hljs-built_in">export</span> HADOOP_HOME=/opt/hadoop/<br><span class="hljs-built_in">export</span> HADOOP_CLASSPATH=`/opt/hadoop/bin/hadoop classpath`<br><span class="hljs-built_in">export</span> HADOOP_CONF_DIR=/opt/hadoop/etc/hadoop<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HADOOP_HOME</span>/bin:<span class="hljs-variable">$HADOOP_HOME</span>/sbin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LltgXD"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/LltgXD.png" alt="LltgXD.png" class="lazyload"></a></p>
-<h3 id="修改slaves文件-spark-env-sh"><a href="#修改slaves文件-spark-env-sh" class="headerlink" title="修改slaves文件,spark.env.sh"></a>修改slaves文件,spark.env.sh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">cp /opt/spark/conf/slaves.template /opt/spark/conf/slaves<br>vim /opt/spark/conf/slaves<br><span class="hljs-comment">#添加Worker节点</span><br>master<br>slave1<br>slave2<br>cp /opt/spark/conf/spark-env.sh.template /opt/spark/conf/spark-env.sh<br>vim /opt/spark/conf/spark-env.sh<br><span class="hljs-comment">#修改SPARK_DAEMON_JAVA_OPTS</span><br><span class="hljs-built_in">export</span> SPARK_DAEMON_JAVA_OPTS=<span class="hljs-string">&quot;-Dspark.depoly.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.     </span><br><span class="hljs-string">url=master1:2181,slave1:2181,slave2:2181 -Dspark.deploy.zookeeper.dir=/spark&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="修改slaves文件-spark-env-sh"><a href="#修改slaves文件-spark-env-sh" class="headerlink" title="修改slaves文件,spark.env.sh"></a>修改slaves文件,spark.env.sh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> /opt/spark/conf/slaves.template /opt/spark/conf/slaves<br>vim /opt/spark/conf/slaves<br><span class="hljs-comment">#添加Worker节点</span><br>master<br>slave1<br>slave2<br><span class="hljs-built_in">cp</span> /opt/spark/conf/spark-env.sh.template /opt/spark/conf/spark-env.sh<br>vim /opt/spark/conf/spark-env.sh<br><span class="hljs-comment">#修改SPARK_DAEMON_JAVA_OPTS</span><br><span class="hljs-built_in">export</span> SPARK_DAEMON_JAVA_OPTS=<span class="hljs-string">&quot;-Dspark.depoly.recoveryMode=ZOOKEEPER -Dspark.deploy.zookeeper.     </span><br><span class="hljs-string">url=master1:2181,slave1:2181,slave2:2181 -Dspark.deploy.zookeeper.dir=/spark&quot;</span><br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lltc6O"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/Lltc6O.png" alt="Lltc6O.png" class="lazyload"></a></p>
-<p>完成配置后，进入sbin目录下，在master执行./spark-all.sh，此时会在master上启动Master节点，再在Slave1上执行start-master.sh<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/Llt61K"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/Llt61K.png" alt="Llt61K.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lltyp6"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/Lltyp6.png" alt="Lltyp6.png" class="lazyload"></a>  </p>
+<p>完成配置后，进入sbin目录下，在master执行.&#x2F;spark-all.sh，此时会在master上启动Master节点，再在Slave1上执行start-master.sh<br><a target="_blank" rel="noopener" href="https://imgtu.com/i/Llt61K"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/Llt61K.png" alt="Llt61K.png" class="lazyload"></a><br><a target="_blank" rel="noopener" href="https://imgtu.com/i/Lltyp6"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/Lltyp6.png" alt="Lltyp6.png" class="lazyload"></a>  </p>
 <table>
 <thead>
 <tr>
@@ -251,7 +258,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" src="http
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1666668203292"></script>
+<script async src="/js/app.js?v=1666669560875"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

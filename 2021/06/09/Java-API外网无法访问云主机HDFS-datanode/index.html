@@ -28,14 +28,14 @@
 <meta property="article:author" content="林肥皂">
 <meta property="article:tag" content="Hadoop">
 <meta property="article:tag" content="大数据">
-<meta property="article:tag" content="HDFS">
 <meta property="article:tag" content="错误记录">
+<meta property="article:tag" content="HDFS">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://z3.ax1x.com/2021/06/08/2sByx1.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1666668203319">
+  <link rel="stylesheet" href="/css/style.css?v=1666669560912">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666668203319">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666669560912">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -72,7 +72,14 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博客
@@ -152,7 +159,7 @@
 <h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>通过修改hdfs-site.xml配置文件，使得DadaNode和客户端之间采用域名的方式访问，解决内网IP无法连接的问题。<br>在hdfs-site.xml中添加以下配置信息：  </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">property</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>dfs.datanode.use.datanode.hostname<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">value</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">value</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">property</span>&gt;</span><br></code></pre></td></tr></table></figure>
 <p>并在JAVA API初始化中，做相应的配置</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">conf.<span class="hljs-builtin-name">set</span>(<span class="hljs-string">&quot;dfs.client.use.datanode.hostname&quot;</span>,<span class="hljs-string">&quot;true&quot;</span>);<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">conf.<span class="hljs-built_in">set</span>(<span class="hljs-string">&quot;dfs.client.use.datanode.hostname&quot;</span>,<span class="hljs-string">&quot;true&quot;</span>);<br></code></pre></td></tr></table></figure>
 
 
 
@@ -230,7 +237,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" src="http
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1666668203320"></script>
+<script async src="/js/app.js?v=1666669560914"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>

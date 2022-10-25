@@ -30,9 +30,9 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://s1.ax1x.com/2022/04/14/LlETNd.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
-  <link rel="stylesheet" href="/css/style.css?v=1666668203292">
+  <link rel="stylesheet" href="/css/style.css?v=1666669560876">
   
-  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666668203292">
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1666669560876">
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="mdui-drawer-body-left">
@@ -69,7 +69,14 @@
             </div>
         </a>
         
-        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/2021/05/24/about/" title="关于博客">
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about.html" title="关于博客">
             <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
             <div class="mdui-list-item-content">
                 关于博客
@@ -145,10 +152,10 @@
     <p>zookeeper安装笔记</p>
 <span id="more"></span>
 <p>zookeeper的搭建主要分为三步<br>1、解压tar包，设置环境变量<br>2、修改zoo.cfg文件<br>3、在对应的服务器上创建并添加myid</p>
-<h3 id="1、-解压zookeeper-tar-gz，添加环境变量"><a href="#1、-解压zookeeper-tar-gz，添加环境变量" class="headerlink" title="1、 解压zookeeper.tar.gz，添加环境变量"></a>1、 解压zookeeper.tar.gz，添加环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf zookeeper.tar.gz /opt/<br>mv /opt/zookeeper-3.4.6 /opt/zookeeper<br>vim /etc/profile<br><span class="hljs-built_in">export</span> ZOOKEEPER_HOME=/opt/zookeeper<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$ZOOKEEPER_HOME</span>/bin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
-<h3 id="2、-修改zoo-cfg文件"><a href="#2、-修改zoo-cfg文件" class="headerlink" title="2、 修改zoo.cfg文件"></a>2、 修改zoo.cfg文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">cp zoo_sample.cfg zoo.cfg<br>vim zoo.cfg<br><span class="hljs-comment">#修改dataDir路径</span><br>dataDir=/opt/zookeeper/data <br><span class="hljs-comment">#指定内部通讯地址与选举leader地址</span><br>server.1=master:2888:3888 <br>server.2=slave1:2888:3888<br>server.3=slave2:2888:3888<br></code></pre></td></tr></table></figure>
+<h3 id="1、-解压zookeeper-tar-gz，添加环境变量"><a href="#1、-解压zookeeper-tar-gz，添加环境变量" class="headerlink" title="1、 解压zookeeper.tar.gz，添加环境变量"></a>1、 解压zookeeper.tar.gz，添加环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">tar -zxf zookeeper.tar.gz /opt/<br><span class="hljs-built_in">mv</span> /opt/zookeeper-3.4.6 /opt/zookeeper<br>vim /etc/profile<br><span class="hljs-built_in">export</span> ZOOKEEPER_HOME=/opt/zookeeper<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$ZOOKEEPER_HOME</span>/bin<br><span class="hljs-built_in">source</span> /etc/profile<br></code></pre></td></tr></table></figure>
+<h3 id="2、-修改zoo-cfg文件"><a href="#2、-修改zoo-cfg文件" class="headerlink" title="2、 修改zoo.cfg文件"></a>2、 修改zoo.cfg文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> zoo_sample.cfg zoo.cfg<br>vim zoo.cfg<br><span class="hljs-comment">#修改dataDir路径</span><br>dataDir=/opt/zookeeper/data <br><span class="hljs-comment">#指定内部通讯地址与选举leader地址</span><br>server.1=master:2888:3888 <br>server.2=slave1:2888:3888<br>server.3=slave2:2888:3888<br></code></pre></td></tr></table></figure>
 <p><a target="_blank" rel="noopener" href="https://imgtu.com/i/LlETNd"><img data-fancybox="gallery" data-sizes="auto" data-src="https://s1.ax1x.com/2022/04/14/LlETNd.png" alt="LlETNd.png" class="lazyload"></a></p>
-<h3 id="3、在对应的服务器上创建并添加myid"><a href="#3、在对应的服务器上创建并添加myid" class="headerlink" title="3、在对应的服务器上创建并添加myid"></a>3、在对应的服务器上创建并添加myid</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash">mkdir /opt/zookeeper/data<br><span class="hljs-comment">#依据zoo.cfg的内容添加myid</span><br><span class="hljs-comment">#master</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1&quot;</span> &gt;&gt; /opt/zookeeper/data/myid <br><span class="hljs-comment">#slave1</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2&quot;</span> &gt;&gt; /opt/zookeeper/data/myid <br><span class="hljs-comment">#slave2</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;3&quot;</span> &gt;&gt; /opt/zookeeper/data/myid <br></code></pre></td></tr></table></figure>
+<h3 id="3、在对应的服务器上创建并添加myid"><a href="#3、在对应的服务器上创建并添加myid" class="headerlink" title="3、在对应的服务器上创建并添加myid"></a>3、在对应的服务器上创建并添加myid</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> /opt/zookeeper/data<br><span class="hljs-comment">#依据zoo.cfg的内容添加myid</span><br><span class="hljs-comment">#master</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1&quot;</span> &gt;&gt; /opt/zookeeper/data/myid <br><span class="hljs-comment">#slave1</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2&quot;</span> &gt;&gt; /opt/zookeeper/data/myid <br><span class="hljs-comment">#slave2</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;3&quot;</span> &gt;&gt; /opt/zookeeper/data/myid <br></code></pre></td></tr></table></figure>
 
 
 <p>配置完成后，在三台服务器执行zkServer.sh start启动zookeeper，执行zkServer.sh status查看状态</p>
@@ -227,7 +234,7 @@ window.document.write('<script id="changyan_mobile_js" charset="utf-8" src="http
 <script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
  
 
-<script async src="/js/app.js?v=1666668203295"></script>
+<script async src="/js/app.js?v=1666669560877"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
