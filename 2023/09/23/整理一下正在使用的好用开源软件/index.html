@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+
+<head>
+  
+  <title>整理一下正在使用的好用开源工具 - LinSoap</title>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta name="keywords" content="Blog">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+  
+  
+
+  <link rel="shortcut icon" href="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" type="image/png" />
+  <meta name="description" content="最近发现了很多开源工具用起来很顺手，也学生优惠白嫖了一个华为云，在上面跑了一些服务，在此总结一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="整理一下正在使用的好用开源工具">
+<meta property="og:url" content="https://838819583.github.io/2023/09/23/%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E6%AD%A3%E5%9C%A8%E4%BD%BF%E7%94%A8%E7%9A%84%E5%A5%BD%E7%94%A8%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/index.html">
+<meta property="og:site_name" content="LinSoap">
+<meta property="og:description" content="最近发现了很多开源工具用起来很顺手，也学生优惠白嫖了一个华为云，在上面跑了一些服务，在此总结一下">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-23T13:54:31.000Z">
+<meta property="article:modified_time" content="2023-09-23T15:57:51.517Z">
+<meta property="article:author" content="林肥皂">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="开源工具">
+<meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/highlight.js@9.15.8/styles/atom-one-dark.css,npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css,gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css,npm/hexo-theme-nexmoe@latest/source/lib/mdui_043tiny/css/mdui.css,npm/hexo-theme-nexmoe@latest/source/lib/iconfont/iconfont.css?v=233" crossorigin>
+  <link rel="stylesheet" href="/css/style.css?v=1695484704641">
+  
+  <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1695484704641">
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="mdui-drawer-body-left">
+  
+  <div id="nexmoe-background">
+    <div class="nexmoe-bg" style="background-image: url(https://z3.ax1x.com/2021/05/25/gxIsL8.png)"></div>
+    <div class="mdui-appbar mdui-shadow-0">
+      <div class="mdui-toolbar">
+        <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+        <div class="mdui-toolbar-spacer"></div>
+        <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+        <a href="/" title="林肥皂" class="mdui-btn mdui-btn-icon"><img src="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" alt="林肥皂"></a>
+       </div>
+    </div>
+  </div>
+  <div id="nexmoe-header">
+      <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="林肥皂">
+            <img src="https://z3.ax1x.com/2021/05/25/gxI3M6.jpg" alt="林肥皂" alt="林肥皂">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>文章</span>13</div>
+        <div><span>标签</span>17</div>
+        <div><span>分类</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/archives.html" title="文章归档">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                文章归档
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple" href="/about" title="关于博客">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                关于博客
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        <form id="search_form" action_e="https://cn.bing.com/search?q=linsoap.club" onsubmit="return search();">
+            <label><input id="search_value" name="q" type="search" placeholder="搜索"></label>
+        </form>
+    </div>
+</div>
+  
+  <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://steamcommunity.com/id/838819583/" target="_blank" mdui-tooltip="{content: 'Steam'}" style="color: rgb(76, 128, 187);background-color: rgba(76, 128, 187, .15);">
+            <i class="nexmoefont icon-steam"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/8683142" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/838819583" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(153, 255, 255);background-color: rgba(153, 255, 255, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a><a class="mdui-ripple" href="https://www.zhihu.com/people/lin-wei-jian-45-53" target="_blank" mdui-tooltip="{content: '知乎'}" style="color: rgb(0, 102, 255);background-color: rgba(0, 102, 255, .15);">
+            <i class="nexmoefont icon-zhihu"></i>
+        </a>
+    </div>
+</div>
+  
+  
+
+  
+  
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/2022%E8%81%8C%E4%B8%9A%E6%8A%80%E8%83%BD%E5%A4%A7%E6%95%B0%E6%8D%AE%E7%AB%9E%E8%B5%9B/" style="font-size: 10px;">2022职业技能大数据竞赛</a> <a href="/tags/HDFS/" style="font-size: 10px;">HDFS</a> <a href="/tags/Hadoop/" style="font-size: 16.67px;">Hadoop</a> <a href="/tags/flink/" style="font-size: 13.33px;">flink</a> <a href="/tags/flume/" style="font-size: 10px;">flume</a> <a href="/tags/hadoop/" style="font-size: 10px;">hadoop</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/linux/" style="font-size: 13.33px;">linux</a> <a href="/tags/pyecharts/" style="font-size: 10px;">pyecharts</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/spark/" style="font-size: 13.33px;">spark</a> <a href="/tags/zookeeper/" style="font-size: 10px;">zookeeper</a> <a href="/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/" style="font-size: 10px;">可视化</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 20px;">大数据</a> <a href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" style="font-size: 10px;">开源工具</a> <a href="/tags/%E6%90%9C%E7%8B%97%E6%90%9C%E7%B4%A2%E6%95%B0%E6%8D%AE/" style="font-size: 13.33px;">搜狗搜索数据</a> <a href="/tags/%E9%94%99%E8%AF%AF%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">错误记录</a>
+    </div>
+    
+  </div>
+
+  
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 林肥皂
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        
+    </div>
+</div><!-- .nexmoe-drawer -->
+  </div>
+  <div id="nexmoe-content">
+    <div class="nexmoe-primary">
+        <div class="nexmoe-post">
+
+  <article>
+    
+        <div class="nexmoe-post-cover" style="padding-bottom: 66.66666666666666%;"> 
+            <img data-src="https://z3.ax1x.com/2021/05/25/gxIsL8.png" data-sizes="auto" alt="整理一下正在使用的好用开源工具" class="lazyload">
+            <h1>整理一下正在使用的好用开源工具</h1>
+        </div>
+    
+    
+    <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2023年09月23日</a>
+    <a><i class="nexmoefont icon-areachart"></i>1.2k 字</a>
+    <a><i class="nexmoefont icon-time-circle-fill"></i>大概 4 分钟</a>
+</div>
+
+    
+
+    <p>最近发现了很多开源工具用起来很顺手，也学生优惠白嫖了一个华为云，在上面跑了一些服务，在此总结一下</p>
+  <span id="more"></span>
+
+<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="1-Alist-网盘整合Web"><a href="#1-Alist-网盘整合Web" class="headerlink" title="1.Alist 网盘整合Web"></a><a target="_blank" rel="noopener" href="https://github.com/alist-org/alist">1.Alist 网盘整合Web</a></h2><p>一个可以整合多个资源的Web工具，包含阿里云、本地存储、OneDrive等等，支持在线查看PDF，视频等格式，还支持挂载，总之非常强大，本人用学校的教育邮箱白嫖了1T的OneDrive网盘，平时把代码备份到OneDrive，在机房上课偷偷看PDF还是很香的</p>
+<h2 id="2-Chevereto-图床Web"><a href="#2-Chevereto-图床Web" class="headerlink" title="2.Chevereto 图床Web"></a><a target="_blank" rel="noopener" href="https://github.com/rodber/chevereto-free">2.Chevereto 图床Web</a></h2><p>发现这个项目后，才发现之前一直用的路过图床其实就是魔改的这个项目，果断部署一个，不过传输速度受限于华为云的水管带宽，不过用于插入Markdown图片还是够用的。</p>
+<h2 id="3-JupyterNoteBook-在线Python编程Web"><a href="#3-JupyterNoteBook-在线Python编程Web" class="headerlink" title="3.JupyterNoteBook 在线Python编程Web"></a><a target="_blank" rel="noopener" href="https://github.com/jupyter/notebook">3.JupyterNoteBook 在线Python编程Web</a></h2><p>平时写一些数据分析或者小项目的时候经常会用JupyterNoteBook，最近突然发现可以以服务的形式部署到服务器上，只需要用浏览器访问就能直接开始用，而且支持在代码中添加Markdown，读写很友好，最近一直用这个上课无聊时刷刷LeetCode，写写经验非常好用。</p>
+<h1 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h1><p>Windows作为主力环境，在各种工具加持下用的特别舒心</p>
+<h2 id="1-Snipaste-截图贴图工具"><a href="#1-Snipaste-截图贴图工具" class="headerlink" title="1.Snipaste 截图贴图工具"></a><a target="_blank" rel="noopener" href="https://github.com/Snipaste/feedback">1.Snipaste 截图贴图工具</a></h2><p>用了很久的一个工具了，可以直接截图并贴图在屏幕上，适合用于抄代码或者看文档，而且设置无边框贴图后，可以直接用贴图工具进行拼接创造</p>
+<h2 id="2-Everything-高效文件查找工具"><a href="#2-Everything-高效文件查找工具" class="headerlink" title="2.Everything 高效文件查找工具"></a><a target="_blank" rel="noopener" href="https://www.voidtools.com/zh-cn/">2.Everything 高效文件查找工具</a></h2><p>如果你用过windows自带的文件查找功能，那你肯定会觉得微软那帮人是不是在偷懒，查找一个文件夹中的内容都慢的要死，相比之下，Everything可以快速寻找整个磁盘中的内容</p>
+<h2 id="3-Wox-快捷启动和文件查找小组件"><a href="#3-Wox-快捷启动和文件查找小组件" class="headerlink" title="3.Wox 快捷启动和文件查找小组件"></a><a target="_blank" rel="noopener" href="https://github.com/Wox-launcher/Wox">3.Wox 快捷启动和文件查找小组件</a></h2><p>Wox其实依赖于Everything，在原先的基础上添加了快捷键启动的方式，得益于Everything的效率，比在桌面一大堆文件夹中寻找某个图标双击的效率还高，Alt+Space，敲入’明日方舟‘，回车，启动！</p>
+<h2 id="4-MarkText-优雅的Markdown编写工具"><a href="#4-MarkText-优雅的Markdown编写工具" class="headerlink" title="4.MarkText 优雅的Markdown编写工具"></a><a target="_blank" rel="noopener" href="https://github.com/marktext/marktext">4.MarkText 优雅的Markdown编写工具</a></h2><p>之前用过VsCode编写Markdown，但除了Markdown语法，还要学一些VsCode的配置和使用方式，每次学会了，许久不写之后又忘了非常的烦，MarkText直接启动就能编写，并且能够实时渲染，非常友好</p>
+<h2 id="5-TrafficMonitor-网速、CPU、内存监视小组件"><a href="#5-TrafficMonitor-网速、CPU、内存监视小组件" class="headerlink" title="5.TrafficMonitor 网速、CPU、内存监视小组件"></a><a target="_blank" rel="noopener" href="https://github.com/zhongyang219/TrafficMonitor">5.TrafficMonitor 网速、CPU、内存监视小组件</a></h2><p>可以直接固定在任务栏上的一个硬件状态监视工具，可以看看当前网络的上传和下载情况，以及内存和CPU负载情况，在于，但是这个组件的CPU负载情况显示其实是有问题的（至少对于我4800H是这样的，常年显示低于10%）</p>
+<h2 id="6-PyBingWallpaper-自动更换Bing壁纸"><a href="#6-PyBingWallpaper-自动更换Bing壁纸" class="headerlink" title="6.PyBingWallpaper 自动更换Bing壁纸"></a><a target="_blank" rel="noopener" href="https://github.com/genzj/pybingwallpaper">6.PyBingWallpaper 自动更换Bing壁纸</a></h2><p>我还是很喜欢windows每日会推送开机界面的行为，有种每日开盲盒的感觉，虽然之前一直用wallpaper动态壁纸，壁纸质量很高，但是总会腻，换新壁纸又很懒，这个服务可以每天定时更换壁纸，由于壁纸源自Bing，质量也是非常高的。</p>
+<h2 id="7-TranslucentTB-任务栏透明工具"><a href="#7-TranslucentTB-任务栏透明工具" class="headerlink" title="7.TranslucentTB 任务栏透明工具"></a><a target="_blank" rel="noopener" href="https://github.com/TranslucentTB/TranslucentTB">7.TranslucentTB 任务栏透明工具</a></h2><p>既然每日换上了好看的壁纸，但是任务栏颜色不会跟着改变，通过这个工具可以使得任务栏透明，但是任务栏上的图标还是在的，所以不影响任务栏的便携性，还能够根据不同的使用场景设置不同的透明度，利用Wox清空桌面后，再加上透明的任务栏，切换到桌面欣赏欣赏每日壁纸非常的享受~~</p>
+<h2 id="8-TTime-一键翻译工具"><a href="#8-TTime-一键翻译工具" class="headerlink" title="8.TTime 一键翻译工具"></a><a target="_blank" rel="noopener" href="https://github.com/inkTimeRecord/TTime">8.TTime 一键翻译工具</a></h2><p>对于每日需要翻英文文档的程序员，有时候使用google自带的翻译会导致浏览器渲染错误，TTime支持划词翻译，截图ORC翻译，想翻译为英文的时候，也可以ALT+E一键唤出翻译。</p>
+<h2 id="9-listen1-音乐集成播放器"><a href="#9-listen1-音乐集成播放器" class="headerlink" title="9.listen1 音乐集成播放器"></a><a target="_blank" rel="noopener" href="https://github.com/listen1/listen1_desktop">9.listen1 音乐集成播放器</a></h2><p>之前一直用网易云音乐听歌，但是网易的日推也太土了，天天推抖音神曲，资源也不算太多，想直接听专辑入口也很难找。这个播放器集成了网易云，qq音乐，和虾米音乐登录，搜索集成的平台更多，界面也很符合我的审美。</p>
+<h2 id="10-SpaceSniffer-磁盘分析工具"><a href="#10-SpaceSniffer-磁盘分析工具" class="headerlink" title="10.SpaceSniffer 磁盘分析工具"></a><a target="_blank" rel="noopener" href="http://www.uderzo.it/main_products/space_sniffer/index.html">10.SpaceSniffer 磁盘分析工具</a></h2><p>这个软件虽然不是开源的，但是免费使用，也比较强大，能够可视化的分析一个磁盘使用的情况，非常直观的看到各个文件的占用情况</p>
+
+  </article>
+
+  
+    
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/linux/" rel="tag">linux</a> <a class="nexmoefont icon-tag-fill -none-link" href="/tags/%E5%BC%80%E6%BA%90%E5%B7%A5%E5%85%B7/" rel="tag">开源工具</a>
+    
+</div>
+
+  <div class="nexmoe-post-footer">
+    
+  </div>
+</div>
+        <div class="nexmoe-post-right">
+          <div class="nexmoe-fixed">
+            <div class="nexmoe-tool"> 
+              
+                
+                  
+                  
+                  
+                    <button class="mdui-fab catalog mdui-ripple" style="overflow:unset;">
+                      <i class="nexmoefont icon-i-catalog"></i>
+                      <div class="nexmoe-toc">
+                        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Linux"><span class="toc-number">1.</span> <span class="toc-text">Linux</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Alist-%E7%BD%91%E7%9B%98%E6%95%B4%E5%90%88Web"><span class="toc-number">1.1.</span> <span class="toc-text">1.Alist 网盘整合Web</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Chevereto-%E5%9B%BE%E5%BA%8AWeb"><span class="toc-number">1.2.</span> <span class="toc-text">2.Chevereto 图床Web</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-JupyterNoteBook-%E5%9C%A8%E7%BA%BFPython%E7%BC%96%E7%A8%8BWeb"><span class="toc-number">1.3.</span> <span class="toc-text">3.JupyterNoteBook 在线Python编程Web</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Windows"><span class="toc-number">2.</span> <span class="toc-text">Windows</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Snipaste-%E6%88%AA%E5%9B%BE%E8%B4%B4%E5%9B%BE%E5%B7%A5%E5%85%B7"><span class="toc-number">2.1.</span> <span class="toc-text">1.Snipaste 截图贴图工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Everything-%E9%AB%98%E6%95%88%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B7%A5%E5%85%B7"><span class="toc-number">2.2.</span> <span class="toc-text">2.Everything 高效文件查找工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Wox-%E5%BF%AB%E6%8D%B7%E5%90%AF%E5%8A%A8%E5%92%8C%E6%96%87%E4%BB%B6%E6%9F%A5%E6%89%BE%E5%B0%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">2.3.</span> <span class="toc-text">3.Wox 快捷启动和文件查找小组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-MarkText-%E4%BC%98%E9%9B%85%E7%9A%84Markdown%E7%BC%96%E5%86%99%E5%B7%A5%E5%85%B7"><span class="toc-number">2.4.</span> <span class="toc-text">4.MarkText 优雅的Markdown编写工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-TrafficMonitor-%E7%BD%91%E9%80%9F%E3%80%81CPU%E3%80%81%E5%86%85%E5%AD%98%E7%9B%91%E8%A7%86%E5%B0%8F%E7%BB%84%E4%BB%B6"><span class="toc-number">2.5.</span> <span class="toc-text">5.TrafficMonitor 网速、CPU、内存监视小组件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-PyBingWallpaper-%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%8D%A2Bing%E5%A3%81%E7%BA%B8"><span class="toc-number">2.6.</span> <span class="toc-text">6.PyBingWallpaper 自动更换Bing壁纸</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-TranslucentTB-%E4%BB%BB%E5%8A%A1%E6%A0%8F%E9%80%8F%E6%98%8E%E5%B7%A5%E5%85%B7"><span class="toc-number">2.7.</span> <span class="toc-text">7.TranslucentTB 任务栏透明工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-TTime-%E4%B8%80%E9%94%AE%E7%BF%BB%E8%AF%91%E5%B7%A5%E5%85%B7"><span class="toc-number">2.8.</span> <span class="toc-text">8.TTime 一键翻译工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-listen1-%E9%9F%B3%E4%B9%90%E9%9B%86%E6%88%90%E6%92%AD%E6%94%BE%E5%99%A8"><span class="toc-number">2.9.</span> <span class="toc-text">9.listen1 音乐集成播放器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-SpaceSniffer-%E7%A3%81%E7%9B%98%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7"><span class="toc-number">2.10.</span> <span class="toc-text">10.SpaceSniffer 磁盘分析工具</span></a></li></ol></li></ol>
+                      </div>
+                    </button>
+                  
+                    
+                
+              
+              <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/xtaodada/xtaodada.github.io@0.0.2/copy.js"></script>
+ 
+
+<script async src="/js/app.js?v=1695484704645"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+  
+
+
+
+
+
+</body>
+
+</html>
